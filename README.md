@@ -6,7 +6,7 @@ A simple, single-page React application to showcase the structure of queries to 
 - Chrome or Firefox
 
 ## Generate an API Key
-1. Navigate to https://sdxbeta.trihydro.com/
+1. Navigate to https://sdx.trihydro.com/
 2. __Sign in__ with your credentials
     - If you don't already have an account, use the __Register__ button to sign up. You'll need to confirm your email before proceeding.
 3. Click the dropdown arrow by your name on the right-side of the menu bar

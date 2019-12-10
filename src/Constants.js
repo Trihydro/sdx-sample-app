@@ -1,4 +1,4 @@
-export const URL = "https://sdxbeta-service.trihydro.com";
+export const URL = "https://sdx-service.trihydro.com";
 
 export const MISSING_API_KEY_MSG = "An API Key wasn't provided. Follow the instructions in the README to configure the project before proceeding.";
 
