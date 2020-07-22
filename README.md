@@ -24,7 +24,7 @@ REACT_APP_API_KEY=<api-key>
 ```
 4. Start the application using `npm start`
 
-After starting, the application should automatically load in your browser. If not, navigate to [http://localhost:3000/](http://localhost:3000/).
+After starting, the application should automatically load in your browser. If not, navigate to [http://localhost:3000/](http://localhost:3000/). Note that the SDX application is set up to accept traffic from this application on port 3000 only. Other ports will fail CORS.
 
 ## Usage
 Use the Query text area to modify query parameters. After a query is ran, results are displayed in the Results area.
