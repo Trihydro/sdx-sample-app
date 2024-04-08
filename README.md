@@ -3,7 +3,7 @@ A simple, single-page React application to showcase the structure of queries to 
 
 ## Prerequisites
 - Node.js (available at [https://nodejs.org/](https://nodejs.org/))
-- Yarn
+- Yarn (this requires Yarn 1 which can currently be found here:  https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 - Chrome or Firefox
 
 ## Generate an API Key
@@ -28,4 +28,4 @@ REACT_APP_API_KEY=<api-key>
 After starting, the application should automatically load in your browser. If not, navigate to [http://localhost:3000/](http://localhost:3000/). Note that the SDX application is set up to accept traffic from this application on port 3000 only. Other ports will fail CORS.
 
 ## Usage
-Use the Query text area to modify query parameters. After a query is ran, results are displayed in the Results area.
+Use the Query text area to modify query parameters. After a query has been run, results are displayed in the Results area.
