@@ -6,7 +6,7 @@ export const DEFAULT_QUERY = `{
     "dialogID": "156",
     "startDate": "2017-01-01T00:00:00.000Z",
     "startDateOperator": "GTE",
-    "endDate": "2020-01-01T00:00:00.000Z",
+    "endDate": "QQQ",
     "endDateOperator": "LTE",
     "nwLat": "41.979552",
     "nwLon": "-111.065979",

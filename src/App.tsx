@@ -50,18 +50,17 @@ function App() {
         }
 
         try {
-            const headers = new Headers();
-            headers.append("Content-Type", "application/json");
-            headers.append("apikey", process.env.REACT_APP_API_KEY as string);
-
             console.log(`Here you have ${URL}/api/${queryType}`);
-            console.log(`With the apikey = ${process.env.REACT_APP_API_KEY as string}`);
+            console.log(`And the query = ${query}`);
 
             const response = await fetch(`${URL}/api/${queryType}`, {
                 method: "POST",
-                mode: "no-cors",
+                mode: "cors",
                 cache: "no-cache",
-                headers: headers,
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": process.env.REACT_APP_API_KEY as string
+                },
                 body: query
             });
 
@@ -83,7 +82,7 @@ function App() {
         setLoading(false);
     };
 
-    const [selectedIndex, setSelectedIndex] = useState(-1);
+    const [selectedIndex, setSelectedIndex] = useState();
 
     return (
         <div className="container">
@@ -98,7 +97,7 @@ function App() {
                 </div>
                 {appError !== null && <ErrorMsg msg={appError} />}
                 <ul className="radio-buttons">
-                    {items.map((item, index) => (<li className={selectedIndex === index ? "radio-buttons-item checked" : "radio-buttons-item"}
+                    {items.map((item, index) => (<li className={selectedIndex === index || (index === 0 && !(selectedIndex > -1) && !(selectedIndex < items.length)) ? "radio-buttons-item checked" : "radio-buttons-item"}
                         key={item}><input type="radio" name="query-type" value={item} onClick={() => setSelectedIndex(index)} /> {item}</li>))}
                 </ul>
                 {/* Body */}
@@ -107,7 +106,7 @@ function App() {
                     <textarea
                         className="form-control"
                         rows={DEFAULT_QUERY_HEIGHT}
-                        value={query}
+                        value={query.replace("QQQ", new Date().toISOString())}
                         onChange={e => setQuery(e.target.value)}
                     />
                 </div>
