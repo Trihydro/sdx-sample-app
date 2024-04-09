@@ -14,11 +14,12 @@ function App() {
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
     // State Hooks
-    const [query, setQuery] = useState(DEFAULT_QUERY);      // Value of the Query textarea
+    const [query, setQuery] = useState(DEFAULT_QUERY.replace("QQQ", new Date().toISOString()));      // Value of the Query textarea
     const [results, setResults] = useState("");             // Values returned by SDX (displayed in the Results textarea)
     const [reqStatus, setReqStatus] = useState("");         // HTTP Status Code (and text) from most-recent query
     const [loading, setLoading] = useState(false);          // Loading indicator (true when query is in progress)
     const [appError, setAppError] = useState(initialError); // Storage for error message
+    const [selectedIndex, setSelectedIndex] = useState(0); // Index of the selected radio button
 
     let items = ["GetData", "GetDecodedMessages", "GetGeoJsonData"];
 
@@ -82,8 +83,6 @@ function App() {
         setLoading(false);
     };
 
-    const [selectedIndex, setSelectedIndex] = useState();
-
     return (
         <div className="container">
             <div className="jumbotron">
@@ -96,17 +95,21 @@ function App() {
                     <hr />
                 </div>
                 {appError !== null && <ErrorMsg msg={appError} />}
-                <ul className="radio-buttons">
-                    {items.map((item, index) => (<li className={selectedIndex === index || (index === 0 && !(selectedIndex > -1) && !(selectedIndex < items.length)) ? "radio-buttons-item checked" : "radio-buttons-item"}
-                        key={item}><input type="radio" name="query-type" value={item} onClick={() => setSelectedIndex(index)} /> {item}</li>))}
-                </ul>
+                <div className="radio-buttons">
+                    {items.map((item, index) => (
+                        <div>
+                            <input checked={selectedIndex === index} type="radio" name="query-type" value={item} onClick={() => setSelectedIndex(index)} />
+                            <label for="item">&nbsp;&nbsp;{item}</label>
+                        </div>
+                    ))}
+                </div>
                 {/* Body */}
                 <h3>Query</h3>
                 <div className="form-group">
                     <textarea
                         className="form-control"
                         rows={DEFAULT_QUERY_HEIGHT}
-                        value={query.replace("QQQ", new Date().toISOString())}
+                        value={query}
                         onChange={e => setQuery(e.target.value)}
                     />
                 </div>
