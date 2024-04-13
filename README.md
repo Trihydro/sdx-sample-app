@@ -23,7 +23,11 @@ A simple, single-page React application to showcase the structure of queries to 
 ```
 REACT_APP_API_KEY=<api-key>
 ```
-4. Start the application using `yarn start`
+If you are not hitting PROD environment, you will need to make a second entry in the `.env` file that looks like this
+REACT_APP_URL=https://sdx-service.trihydro.com
+with the appropriate value for the right hand side.
+
+5. Start the application using `yarn start`
 
 After starting, the application should automatically load in your browser. If not, navigate to [http://localhost:3000/](http://localhost:3000/). Note that the SDX application is set up to accept traffic from this application on port 3000 only. Other ports will fail CORS.
 

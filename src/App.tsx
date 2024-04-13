@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import {
-    URL,
-    DEFAULT_QUERY,
-    DEFAULT_QUERY_HEIGHT,
+    REQUESTOBJECTS,
     MISSING_API_KEY_MSG
 } from "./Constants";
 import { ErrorMsg } from "./ErrorMsg";
@@ -11,17 +9,30 @@ import { Loading } from "./Loading";
 
 function App() {
     const keyMissing = !process.env.REACT_APP_API_KEY;
+    const urlMissing = !process.env.REACT_APP_URL;
+    const baseUrl = urlMissing ? "https://sdx-service.trihydro.com" : process.env.REACT_APP_URL;
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
+    let requests = REQUESTOBJECTS.map((item) => item.request);
+
     // State Hooks
-    const [query, setQuery] = useState(DEFAULT_QUERY.replace("QQQ", new Date().toISOString()));      // Value of the Query textarea
+    const [query, setQuery] = useState(REQUESTOBJECTS[0].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));      // Value of the Query textarea
     const [results, setResults] = useState("");             // Values returned by SDX (displayed in the Results textarea)
     const [reqStatus, setReqStatus] = useState("");         // HTTP Status Code (and text) from most-recent query
     const [loading, setLoading] = useState(false);          // Loading indicator (true when query is in progress)
     const [appError, setAppError] = useState(initialError); // Storage for error message
     const [selectedIndex, setSelectedIndex] = useState(0); // Index of the selected radio button
+    const [url, setUrl] = useState(`${baseUrl}/api/${REQUESTOBJECTS[0].request}`);
+    const [submittedUrl, setSubmittedUrl] = useState("");
+    const [method, setMethod] = useState(REQUESTOBJECTS[0].requestType);
+    const [queryHeight, setQueryHeight] = useState(query.split(/\n/).length);
 
-    let items = ["GetData", "GetDecodedMessages", "GetGeoJsonData"];
+    const setUserFields = (item: string, index) => {
+        setSelectedIndex(index);
+        setUrl(`${baseUrl}/api/${item}`);
+        setMethod(REQUESTOBJECTS[index].requestType);
+        setQueryHeight(REQUESTOBJECTS[index].defaultQueryOrBody.split(/\n/).length);
+    }
 
     /**
      * This method handles fetching data from the SDX, using the provided query
@@ -37,25 +48,16 @@ function App() {
 
         // Update state, set loading indicator
         setLoading(true);
+        setSubmittedUrl(url);
         setResults("");
         setReqStatus("");
 
-        var ele = document.getElementsByName('query-type');
-
-        var queryType = "";
-        var i = 0;
-
-        for (i = 0; i < ele.length; i++) {
-            if ((ele[i] as HTMLInputElement).checked)
-                queryType = (ele[i] as HTMLInputElement).value;
-        }
-
         try {
-            console.log(`Here you have ${URL}/api/${queryType}`);
-            console.log(`And the query = ${query}`);
+            console.log(`Here you have ${url}`);
+            console.log(`And the method = ${method}`);
 
-            const response = await fetch(`${URL}/api/${queryType}`, {
-                method: "POST",
+            const response = await fetch(`${url}`, {
+                method: method as string,
                 mode: "cors",
                 cache: "no-cache",
                 headers: {
@@ -90,29 +92,40 @@ function App() {
                 <div className="App">
                     <h1 className="display-4">SDX API Sample Application</h1>
                     <p className="lead">
-                        Please refer to <a href={URL}>{URL}</a> for documentation.
+                        Please refer to <a href={baseUrl}>{baseUrl}</a> for documentation.
                     </p>
                     <hr />
                 </div>
                 {appError !== null && <ErrorMsg msg={appError} />}
                 <div className="radio-buttons">
-                    {items.map((item, index) => (
+                    {requests.map((item, index) => (
                         <div>
-                            <input checked={selectedIndex === index} type="radio" name="query-type" value={item} onClick={() => setSelectedIndex(index)} />
-                            <label for="item">&nbsp;&nbsp;{item}</label>
+                            <input key={index} defaultChecked={selectedIndex === index} type="radio" name="query-type" value={item} onClick={() => setUserFields(item, index)} />
+                            <label htmlFor="item">&nbsp;&nbsp;{item}</label>
                         </div>
-                    ))}
+                    ))}                    
+                </div>
+                <div>
+                    <br />
+                    <h5>Type of request: <b>{method}</b></h5>
+                    <br />
                 </div>
                 {/* Body */}
-                <h3>Query</h3>
-                <div className="form-group">
-                    <textarea
-                        className="form-control"
-                        rows={DEFAULT_QUERY_HEIGHT}
-                        value={query}
-                        onChange={e => setQuery(e.target.value)}
-                    />
-                </div>
+                <>
+                    {method === "POST" &&
+                        <h5>Body of Request</h5>
+                    }
+                    {method != "POST" &&
+                        <h5>Query Arguments</h5>}
+                    <div className="form-group">
+                        <textarea
+                            className="form-control"
+                            rows={queryHeight}
+                            value={query}
+                            onChange={e => setQuery(e.target.value)}
+                        />
+                    </div>
+                </>
                 <button
                     type="button"
                     className="btn btn-primary float-right"
@@ -121,7 +134,27 @@ function App() {
                 >
                     {loading ? <Loading /> : "Submit"}
                 </button>
-                <h3 style={{ clear: "both" }}>Results</h3>
+                <h5 style={{ clear: "both" }}>Submitted URL</h5>
+                <div className="form-group">
+                    <textarea
+                        readOnly
+                        id="submittedUrl"
+                        className="form-control"
+                        rows={1}
+                        style={
+                            reqStatus.includes("400") ? { backgroundColor: "#f8d7da" } : {}
+                        }
+                        value={method === "POST"
+                            ? submittedUrl
+                                ? submittedUrl
+                                : ""
+                            : submittedUrl
+                                ? `${submittedUrl}${query.replace(/(\r\n|\n|\r)/gm, "")}`
+                                : ""}
+                        onChange={e => setQuery(e.target.value)}
+                    />
+                </div>
+                <h5 style={{ clear: "both" }}>Results</h5>
                 <div className="form-group">
                     <textarea
                         readOnly
