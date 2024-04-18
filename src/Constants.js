@@ -77,80 +77,93 @@ postalabbreviation=MA`;
 
 const DEFAULT_WZDX_SPECIFICLOCATION_QUERYARGUMENTS =
     `?
-lat=37.77486608985832
+lat=37.594049901
 &
-lon=-122.40286989045529
+lon=-122.490431
 &
 dist=5`;
 
 export const REQUESTOBJECTS = [
     {
+        displayText: "GetData",
         request: "GetData",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_EXECUTEQUERYASYNC_BODY,
         notes: "Alternatives to GetData are GetBundles and GetDistributions."
     },
     {
+        displayText: "GetDecodedMessages",
         request: "GetDecodedMessages",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_EXECUTEQUERYASYNC_BODY,
         notes: "Returns advisory messages in a human-readable format."
     },
     {
+        displayText: "GetGeoJsonData",
         request: "GetGeoJsonData",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_EXECUTEQUERYASYNC_BODY,
         notes: "Returns advisory messages as a GeoJSON FeatureCollection with ITIS codes."
     },
     {
+        displayText: "GetDataByRecordId",
         request: "GetDataByRecordId",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_GETDATABYRECORDID_POST_BODY,
         notes: "Type is 0 for hex and 1 for decimal."
     },
     {
+        displayText: "GetMessagesBetweenPlaces",
         request: "GetMessagesBetweenPlaces",
         requestType: "GET",
         defaultQueryOrBody: DEFAULT_GETMESSAGESBETWEENPLACES_QUERYARGUMENTS,
         notes: "The default road is Sheridan, WY to Cheyenne, WY and should have some messages."
     },
     {
+        displayText: "GetMessagesIntersectingGeometry",
         request: "GetMessagesIntersectingGeometry",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_GETMESSAGESINTERSECTINGGEOMETRY_BODY,
         notes: "The default covers an area from Denver northward and should have some messages."
     },
     {
+        displayText: "GetAllITISCodes",
         request: "GetAllITISCodes",
         requestType: "GET",
         defaultQueryOrBody: DEFAULT_GETALLITISCODES_QUERYARGUMENTS,
         notes: ""
     },
     {
+        displayText: "Decode",
         request: "Decode",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_DECODE_BODY,
         notes: "Decodes advisory situation data."
     },
     {
+        displayText: "Wzdx  (for all results in a state)",
         request: "Wzdx",
         requestType: "GET",
         defaultQueryOrBody: DEFAULT_WZDX_POSTALABBREVIATION_QUERYARGUMENTS,
         notes: "Searches WZDx by postal abbreviation."
     },
     {
+        displayText: "Wzdx   (for all results near a given point)",
         request: "Wzdx",
         requestType: "GET",
         defaultQueryOrBody: DEFAULT_WZDX_SPECIFICLOCATION_QUERYARGUMENTS,
         notes: "Searches WZDx by radius from specified location.  Radius (in miles) must be from an enumerated list."
     },
     {
+        displayText: "Wzdx/SwitchSpecVersion",
         request: "Wzdx/switch-spec-version",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_SAMPLEFEED_BODY,
-        notes: "Allows switching a WZDx feed to a different version. Some data will be lost if the target version does not support the data."
+        notes: "Allows switching a WZDx feed to a different version. Some data will be lost if the target version does not support the data.",
+        outgoingVersion: "3.1"
     },
     {
+        displayText: "Wzdx/CheckJsonFeed",
         request: "Wzdx/check-json-feed",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_BADSAMPLEFEED_BODY,

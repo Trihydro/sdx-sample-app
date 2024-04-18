@@ -14,7 +14,9 @@ function App() {
     const baseUrl = urlMissing ? "https://sdx-service.trihydro.com" : process.env.REACT_APP_URL;
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
-    let requests = REQUESTOBJECTS.map((item) => item.request);
+    let requests = REQUESTOBJECTS;
+
+    let mdoTest = REQUESTOBJECTS.map((item) => <li> key=item.request id=item.request displayText=item.displayText</li>);
 
     // State Hooks
     const [loading, setLoading] = useState(false);          // Loading indicator (true when query is in progress)
@@ -29,17 +31,25 @@ function App() {
     const selectedIndex = useTrait(0);  // Index of the selected radio button
     const url = useTrait(`${baseUrl}/api/${REQUESTOBJECTS[0].request}`);  // this is the URL that will be sent
     const submittedUrl = useTrait("");  // this is the URL that was sent
+    const request = useTrait(REQUESTOBJECTS[0].request);  // the request that was selected
     const requestType = useTrait(REQUESTOBJECTS[0].requestType);  // POST or GET
     const queryHeight = useTrait((query.get().split(/\n/)).length);  // determines how high to make the request textarea
     const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
+    const outgoingVersion = useTrait("0.0");  // for the switch-spec-version request
 
-    const setUserFields = (item: string, index) => {
-        query.set(REQUESTOBJECTS[index].defaultQueryOrBody);
+    const setUserFields = (item, index) => {
+        query.set(REQUESTOBJECTS[index].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));
         queryHeight.set((query.get().split(/\n/)).length);
         selectedIndex.set(index);
-        url.set(`${baseUrl}/api/${item}`);
+        url.set(`${baseUrl}/api/${item.request}`);
+        request.set(item.request);
         requestType.set(REQUESTOBJECTS[index].requestType);
         notes.set(REQUESTOBJECTS[index].notes);
+        results.set("");
+        if (item.request === "Wzdx/switch-spec-version") {
+            outgoingVersion.set(outgoingVersion.get());
+        }
+        else { outgoingVersion.set("0.0") };
 
         console.log(`The setUserFields method has been called with ${item} at ${index}`);
         console.log('URL: ', url.get());
@@ -56,42 +66,76 @@ function App() {
      * This method handles fetching data from the SDX, using the provided query
      */
     const fetchData = async () => {
-        // Verify query is valid JSON
-        try {
-            JSON.parse(query.get());
-        } catch (ex) {
-            alert("Query isn't valid JSON.");
-            return;
+        if (requestType.get() === "POST") {
+            // Verify query is valid JSON
+            try {
+                JSON.parse(query.get());
+            } catch (ex) {
+                alert("Query isn't valid JSON.");
+                return;
+            }
         }
 
         // Update state, set loading indicator
         setLoading(true);
         results.set("");
         reqStatus.set("");
+
+        if (url.get() === "Wzdx/switch-spec-version") {
+            url.set(`${url.get}?outgoingVersion=${outgoingVersion.get()}`);
+        }
+
+        console.log("before trying to set the submittedUrl, you have this: ", submittedUrl.get());
+        console.log("and the url is this: ", url.get());
+        console.log(` and the requestType is this:  XX${requestType.get()}XX`);
+        console.log(` and the bool is this:  ${requestType.get() === "POST"}`);
+
+
+        if (requestType.get() !== "POST") {
+            submittedUrl.set(`${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`);
+        }
         submittedUrl.set(
             requestType.get() === "POST"
-                ? submittedUrl.get()
-                    ? submittedUrl.get()
-                    : ""
-                : submittedUrl.get()
-                    ? `${submittedUrl.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
-                    : ""
+                ? url.get()
+                : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
         );
 
         try {
-            console.log(`Here you have ${url.get()}`);
+            console.log(`Here you have ${submittedUrl.get()}`);
             console.log(`And the requestType = ${requestType.get()}`);
 
-            const response = await fetch(`${url.get()}`, {
-                method: requestType.get(),
-                mode: "cors",
-                cache: "no-cache",
-                headers: {
-                    "Content-Type": "application/json",
-                    "apikey": process.env.REACT_APP_API_KEY as string
-                },
-                body: requestType.get() === "POST" ? query.get() : undefined
-            });
+            const response =
+                requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
+                    method: requestType.get(),
+                    mode: "cors",
+                    cache: "no-cache",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": process.env.REACT_APP_API_KEY as string
+                    },
+                    body: query.get()
+                })
+                    : await fetch(`${submittedUrl.get()}`, {
+                        method: requestType.get(),
+                        mode: "cors",
+                        cache: "no-cache",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "apikey": process.env.REACT_APP_API_KEY as string
+                        }
+                    })
+                ;
+
+            let earlyResults = await response.text();
+
+            if (response.status === 200 && earlyResults.length === 0) {
+                earlyResults = "No results returned";
+            }
+
+            console.log(`Here is the status: ${response.status} `);
+            console.log(`Here is the statusText: ${response.statusText}`);
+
+            console.log(`this is being returned: ${earlyResults.substring(0, 30)}`);
 
             // After receiving a response, update the HTTP status code
             reqStatus.set(`Status: ${response.status} ${response.statusText}`);
@@ -99,8 +143,11 @@ function App() {
             // If the response is OK, we have results.
             // If the response was a Bad Request, we have information
             // about why the request was bad
+            if (response.status === 404) {
+                results.set("404 Not Found");
+            }
             if (response.status === 200 || response.status === 400) {
-                let returnedResults = await response.json();
+                let returnedResults = earlyResults;
                 results.set(returnedResults);
             }
         } catch (ex) {
@@ -128,8 +175,8 @@ function App() {
                 <div className="radio-buttons">
                     {requests.map((item, index) => (
                         <div>
-                            <input key={index} defaultChecked={selectedIndex.get() === index} type="radio" name="query-type" value={item} onClick={() => setUserFields(item, index)} />
-                            <label htmlFor="item">&nbsp;&nbsp;{item}</label>
+                            <input key={index} defaultChecked={selectedIndex.get() === index} type="radio" name="query-type" value={item.displayText} onClick={() => setUserFields(item, index)} />
+                            <label htmlFor="item">&nbsp;&nbsp;{item.displayText}</label>
                         </div>
                     ))}                    
                 </div>
@@ -157,7 +204,7 @@ function App() {
                                     readOnly
                                     id="submittedUrl"
                                     className="form-control"
-                                    rows={1}
+                                    rows={requestType.get() === "POST" ? 1 : 2}
                                     style={
                                         reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
                                     }
@@ -173,22 +220,40 @@ function App() {
                         </>
                         }
                     <br />
-                </div>
-                {/* Body */}
-                <>
-                        {requestType.get() === "POST" &&
-                        <h5>Body of Request</h5>
+                    </div>
+                    {request.get() === "Wzdx/switch-spec-version" &&
+                        <div className="form-group">
+                            <label htmlFor="outgoingVersion">Outgoing Version</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={outgoingVersion.get()}
+                                onChange={e => outgoingVersion.set(e.target.value)}
+                            />
+                        </div>
                     }
-                        {requestType.get() !== "POST" &&
-                        <h5>Query Arguments</h5>}
-                    <div className="form-group">
-                        <textarea
-                            className="form-control"
+                    {/* Body */}
+                    {/* At least one GET, "GetAllITISCodes" does not have any query arguments so don't display "Query Arguments" or the textarea when query.get().length === 0*/}
+                <>
+                        {
+                            requestType.get() === "POST" &&
+                        <h5>Body of Request</h5>
+                        }
+                        {
+                            requestType.get() !== "POST" && query.get().length > 0 &&
+                            <h5>Query Arguments</h5>
+                        }
+                        {
+                            query.get().length > 0 &&
+                            <div className="form-group">
+                                <textarea
+                                    className="form-control"
                                 rows={queryHeight.get()}
                                 value={query.get()}
                                 onChange={e => query.set(e.target.value)}
-                        />
-                    </div>
+                                    />
+                                </div>
+                        }
                 </>
                 <button
                     type="button"
@@ -209,7 +274,7 @@ function App() {
                                 style={
                                     reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
                                 }
-                                value={results.get() ? JSON.stringify(results.get(), null, 2) : ""}
+                                value={results.get()}
                             />
                             <small className="float-left">{reqStatus.get()}</small>
                             <small className="float-right">
