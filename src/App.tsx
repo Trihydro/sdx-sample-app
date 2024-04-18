@@ -6,6 +6,7 @@ import {
 } from "./Constants";
 import { ErrorMsg } from "./ErrorMsg";
 import { Loading } from "./Loading";
+import useTrait from "./UseTrait";
 
 function App() {
     const keyMissing = !process.env.REACT_APP_API_KEY;
@@ -16,22 +17,39 @@ function App() {
     let requests = REQUESTOBJECTS.map((item) => item.request);
 
     // State Hooks
-    const [query, setQuery] = useState(REQUESTOBJECTS[0].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));      // Value of the Query textarea
-    const [results, setResults] = useState("");             // Values returned by SDX (displayed in the Results textarea)
-    const [reqStatus, setReqStatus] = useState("");         // HTTP Status Code (and text) from most-recent query
     const [loading, setLoading] = useState(false);          // Loading indicator (true when query is in progress)
-    const [appError, setAppError] = useState(initialError); // Storage for error message
-    const [selectedIndex, setSelectedIndex] = useState(0); // Index of the selected radio button
-    const [url, setUrl] = useState(`${baseUrl}/api/${REQUESTOBJECTS[0].request}`);
-    const [submittedUrl, setSubmittedUrl] = useState("");
-    const [method, setMethod] = useState(REQUESTOBJECTS[0].requestType);
-    const [queryHeight, setQueryHeight] = useState(query.split(/\n/).length);
+
+    // very important note:  set<xxx> in useState is asynchronous, so the value of xxx will not be updated immediately.
+    // We need the synchronous value.  We are using useTrait from https://dev.to/bytebodger/synchronous-state-with-react-hooks-1k4f
+    // UseTrait works great with numbers and strings but is problematic with large, complex, or inherently asynchronous values
+    const query = useTrait((REQUESTOBJECTS[0].defaultQueryOrBody as string).replace("QQQ", new Date().toISOString()));  // Value of the Query textarea
+    const results = useTrait("");  // Values returned by SDX (displayed in the Results textarea)
+    const reqStatus = useTrait("");  // HTTP Status Code (and text) from most-recent query
+    const appError = useTrait(initialError);  // Storage for error message
+    const selectedIndex = useTrait(0);  // Index of the selected radio button
+    const url = useTrait(`${baseUrl}/api/${REQUESTOBJECTS[0].request}`);  // this is the URL that will be sent
+    const submittedUrl = useTrait("");  // this is the URL that was sent
+    const requestType = useTrait(REQUESTOBJECTS[0].requestType);  // POST or GET
+    const queryHeight = useTrait((query.get().split(/\n/)).length);  // determines how high to make the request textarea
+    const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
 
     const setUserFields = (item: string, index) => {
-        setSelectedIndex(index);
-        setUrl(`${baseUrl}/api/${item}`);
-        setMethod(REQUESTOBJECTS[index].requestType);
-        setQueryHeight(REQUESTOBJECTS[index].defaultQueryOrBody.split(/\n/).length);
+        query.set(REQUESTOBJECTS[index].defaultQueryOrBody);
+        queryHeight.set((query.get().split(/\n/)).length);
+        selectedIndex.set(index);
+        url.set(`${baseUrl}/api/${item}`);
+        requestType.set(REQUESTOBJECTS[index].requestType);
+        notes.set(REQUESTOBJECTS[index].notes);
+
+        console.log(`The setUserFields method has been called with ${item} at ${index}`);
+        console.log('URL: ', url.get());
+        console.log('RequestType: ', requestType.get());
+        console.log('Notes: ', notes.get());
+        console.log('and here is what I would expect them to be:');
+        console.log('URL: ', `${baseUrl}/api/${item}`);
+        console.log('RequestType: ', REQUESTOBJECTS[index].requestType);
+        console.log('Query Height: ', (REQUESTOBJECTS[index].defaultQueryOrBody as string).split(/\n/).length);
+        console.log('Notes: ', REQUESTOBJECTS[index].notes);
     }
 
     /**
@@ -40,7 +58,7 @@ function App() {
     const fetchData = async () => {
         // Verify query is valid JSON
         try {
-            JSON.parse(query);
+            JSON.parse(query.get());
         } catch (ex) {
             alert("Query isn't valid JSON.");
             return;
@@ -48,37 +66,45 @@ function App() {
 
         // Update state, set loading indicator
         setLoading(true);
-        setSubmittedUrl(url);
-        setResults("");
-        setReqStatus("");
+        results.set("");
+        reqStatus.set("");
+        submittedUrl.set(
+            requestType.get() === "POST"
+                ? submittedUrl.get()
+                    ? submittedUrl.get()
+                    : ""
+                : submittedUrl.get()
+                    ? `${submittedUrl.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
+                    : ""
+        );
 
         try {
-            console.log(`Here you have ${url}`);
-            console.log(`And the method = ${method}`);
+            console.log(`Here you have ${url.get()}`);
+            console.log(`And the requestType = ${requestType.get()}`);
 
-            const response = await fetch(`${url}`, {
-                method: method as string,
+            const response = await fetch(`${url.get()}`, {
+                method: requestType.get(),
                 mode: "cors",
                 cache: "no-cache",
                 headers: {
                     "Content-Type": "application/json",
                     "apikey": process.env.REACT_APP_API_KEY as string
                 },
-                body: query
+                body: requestType.get() === "POST" ? query.get() : undefined
             });
 
             // After receiving a response, update the HTTP status code
-            setReqStatus(`Status: ${response.status} ${response.statusText}`);
+            reqStatus.set(`Status: ${response.status} ${response.statusText}`);
 
             // If the response is OK, we have results.
             // If the response was a Bad Request, we have information
             // about why the request was bad
             if (response.status === 200 || response.status === 400) {
-                let results = await response.json();
-                setResults(results);
+                let returnedResults = await response.json();
+                results.set(returnedResults);
             }
         } catch (ex) {
-            setAppError(`An error has occurred: ${ex}`);
+            appError.set(`An error has occurred: ${ex}`);
         }
 
         // Request is finished, reset loading indicator
@@ -86,43 +112,81 @@ function App() {
     };
 
     return (
+        <>
+            {console.log(`RETURN has been called and these are the values: ${url.get()}, ${requestType.get()}, ${queryHeight.get()}, ${notes.get()}`)}
         <div className="container">
             <div className="jumbotron">
                 {/* Header */}
                 <div className="App">
-                    <h1 className="display-4">SDX API Sample Application</h1>
+                        <h4>Guide to making Postman requests for SDx</h4>
                     <p className="lead">
                         Please refer to <a href={baseUrl}>{baseUrl}</a> for documentation.
                     </p>
                     <hr />
                 </div>
-                {appError !== null && <ErrorMsg msg={appError} />}
+                    {appError.get() !== null && <ErrorMsg msg={appError.get()} />}
                 <div className="radio-buttons">
                     {requests.map((item, index) => (
                         <div>
-                            <input key={index} defaultChecked={selectedIndex === index} type="radio" name="query-type" value={item} onClick={() => setUserFields(item, index)} />
+                            <input key={index} defaultChecked={selectedIndex.get() === index} type="radio" name="query-type" value={item} onClick={() => setUserFields(item, index)} />
                             <label htmlFor="item">&nbsp;&nbsp;{item}</label>
                         </div>
                     ))}                    
                 </div>
+                    {notes.get() &&
+                        <div className="form-group">
+                            <h5>Notes for this request:</h5>
+                            <textarea
+                                readOnly
+                                id="notes"
+                                className="form-control"
+                                rows={1}
+                                style={
+                                    reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
+                                }
+                                value={notes.get()}
+                            />
+                        </div>
+                    }
                 <div>
-                    <br />
-                    <h5>Type of request: <b>{method}</b></h5>
+                        <br />
+                        {results.get().length > 0 && <>
+                            <div className="form-group">
+                                <h5><b>{requestType.get()}</b> with this Request URL:</h5>
+                                <textarea
+                                    readOnly
+                                    id="submittedUrl"
+                                    className="form-control"
+                                    rows={1}
+                                    style={
+                                        reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
+                                    }
+                                    value={requestType.get() === "POST"
+                                        ? submittedUrl.get()
+                                        : `${submittedUrl.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`}
+                                />
+                            </div>
+                        </>
+                        }
+                        {results.get().length === 0 && <>
+                            <h5>The request will display when you click 'Submit'</h5>
+                        </>
+                        }
                     <br />
                 </div>
                 {/* Body */}
                 <>
-                    {method === "POST" &&
+                        {requestType.get() === "POST" &&
                         <h5>Body of Request</h5>
                     }
-                    {method != "POST" &&
+                        {requestType.get() !== "POST" &&
                         <h5>Query Arguments</h5>}
                     <div className="form-group">
                         <textarea
                             className="form-control"
-                            rows={queryHeight}
-                            value={query}
-                            onChange={e => setQuery(e.target.value)}
+                                rows={queryHeight.get()}
+                                value={query.get()}
+                                onChange={e => query.set(e.target.value)}
                         />
                     </div>
                 </>
@@ -130,50 +194,33 @@ function App() {
                     type="button"
                     className="btn btn-primary float-right"
                     onClick={fetchData}
-                    disabled={appError !== null || loading}
+                        disabled={appError.get() !== null || loading}
                 >
                     {loading ? <Loading /> : "Submit"}
-                </button>
-                <h5 style={{ clear: "both" }}>Submitted URL</h5>
-                <div className="form-group">
-                    <textarea
-                        readOnly
-                        id="submittedUrl"
-                        className="form-control"
-                        rows={1}
-                        style={
-                            reqStatus.includes("400") ? { backgroundColor: "#f8d7da" } : {}
-                        }
-                        value={method === "POST"
-                            ? submittedUrl
-                                ? submittedUrl
-                                : ""
-                            : submittedUrl
-                                ? `${submittedUrl}${query.replace(/(\r\n|\n|\r)/gm, "")}`
-                                : ""}
-                        onChange={e => setQuery(e.target.value)}
-                    />
-                </div>
-                <h5 style={{ clear: "both" }}>Results</h5>
-                <div className="form-group">
-                    <textarea
-                        readOnly
-                        id="results"
-                        className="form-control"
-                        rows={10}
-                        style={
-                            reqStatus.includes("400") ? { backgroundColor: "#f8d7da" } : {}
-                        }
-                        value={results ? JSON.stringify(results, null, 2) : ""}
-                        onChange={e => setQuery(e.target.value)}
-                    />
-                    <small className="float-left">{reqStatus}</small>
-                    <small className="float-right">
-                        {Array.isArray(results) ? `${results.length} results` : null}
-                    </small>
-                </div>
+                    </button>
+                    {results.get().length > 0 && <>
+                        <h5 style={{ clear: "both" }}>Results</h5>
+                        <div className="form-group">
+                            <textarea
+                                readOnly
+                                id="results"
+                                className="form-control"
+                                rows={10}
+                                style={
+                                    reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
+                                }
+                                value={results.get() ? JSON.stringify(results.get(), null, 2) : ""}
+                            />
+                            <small className="float-left">{reqStatus.get()}</small>
+                            <small className="float-right">
+                                {Array.isArray(results.get()) ? `${results.get().length} results` : null}
+                            </small>
+                        </div>
+                    </>
+                    }
             </div>
-        </div>
+            </div >
+        </>
     );
 }
 
