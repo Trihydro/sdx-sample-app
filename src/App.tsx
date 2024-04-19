@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import "./App.css";
 import {
     REQUESTOBJECTS,
@@ -8,6 +8,7 @@ import {
 import { ErrorMsg } from "./ErrorMsg";
 import { Loading } from "./Loading";
 import useTrait from "./UseTrait";
+
 
 function App() {
     const keyMissing = !process.env.REACT_APP_API_KEY;
@@ -37,7 +38,7 @@ function App() {
     const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
     const outgoingVersionIndex = useTrait(0);  // for the switch-spec-version request
 
-    const setUserFields = (item, index) => {
+    const setUserFields = (item: { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion?: undefined; } | { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion: string; }, index: number) => {
         query.set(REQUESTOBJECTS[index].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));
         queryHeight.set((query.get().split(/\n/)).length);
         selectedIndex.set(index);
@@ -202,9 +203,7 @@ function App() {
                                     style={
                                         reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
                                     }
-                                    value={requestType.get() === "POST"
-                                        ? submittedUrl.get()
-                                        : `${submittedUrl.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`}
+                                    value={submittedUrl.get()}
                                 />
                             </div>
                         </>
@@ -286,3 +285,4 @@ function App() {
 }
 
 export default App;
+

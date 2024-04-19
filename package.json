@@ -1,6 +1,6 @@
 {
   "name": "sample-app",
-  "version": "0.1.0",
+"version": "0.2.0",
   "private": true,
   "dependencies": {
     "@types/node": "^20.12.7",
@@ -33,6 +33,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.2.79",
     "react-scripts": "^5.0.1"
   }
 }
