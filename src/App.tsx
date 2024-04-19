@@ -9,7 +9,6 @@ import { ErrorMsg } from "./ErrorMsg";
 import { Loading } from "./Loading";
 import useTrait from "./UseTrait";
 
-
 function App() {
     const keyMissing = !process.env.REACT_APP_API_KEY;
     const urlMissing = !process.env.REACT_APP_URL;
@@ -48,16 +47,6 @@ function App() {
         notes.set(REQUESTOBJECTS[index].notes);
         results.set("");
         outgoingVersionIndex.set(0);
-
-        console.log(`The setUserFields method has been called with ${item} at ${index}`);
-        console.log('URL: ', url.get());
-        console.log('RequestType: ', requestType.get());
-        console.log('Notes: ', notes.get());
-        console.log('and here is what I would expect them to be:');
-        console.log('URL: ', `${baseUrl}/api/${item}`);
-        console.log('RequestType: ', REQUESTOBJECTS[index].requestType);
-        console.log('Query Height: ', (REQUESTOBJECTS[index].defaultQueryOrBody as string).split(/\n/).length);
-        console.log('Notes: ', REQUESTOBJECTS[index].notes);
     }
 
     /**
@@ -79,14 +68,6 @@ function App() {
         results.set("");
         reqStatus.set("");
 
-
-
-        console.log("before trying to set the submittedUrl, you have this: ", submittedUrl.get());
-        console.log("and the url is this: ", url.get());
-        console.log(` and the requestType is this:  XX${requestType.get()}XX`);
-        console.log(` and the bool is this:  ${requestType.get() === "POST"}`);
-
-
         submittedUrl.set(
             request.get() === "Wzdx/switch-spec-version" ? `${url.get()}?outgoingVersion=${validOutgoingVersions[outgoingVersionIndex.get()]}`
                 :
@@ -96,9 +77,6 @@ function App() {
         );
 
         try {
-            console.log(`Here you have ${submittedUrl.get()}`);
-            console.log(`And the requestType = ${requestType.get()}`);
-
             const response =
                 requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
                     method: requestType.get(),
@@ -127,11 +105,6 @@ function App() {
                 earlyResults = "No results returned";
             }
 
-            console.log(`Here is the status: ${response.status} `);
-            console.log(`Here is the statusText: ${response.statusText}`);
-
-            console.log(`this is being returned: ${earlyResults.substring(0, 30)}`);
-
             // After receiving a response, update the HTTP status code
             reqStatus.set(`Status: ${response.status} ${response.statusText}`);
 
@@ -155,7 +128,6 @@ function App() {
 
     return (
         <>
-            {console.log(`RETURN has been called and these are the values: ${url.get()}, ${requestType.get()}, ${queryHeight.get()}, ${notes.get()}`)}
         <div className="container">
                 <div className="jumbotron">
                 {/* Header */}
