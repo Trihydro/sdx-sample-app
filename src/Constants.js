@@ -7,6 +7,8 @@ import {
 
 export const MISSING_API_KEY_MSG = "An API Key wasn't provided. Follow the instructions in the README to configure the project before proceeding.";
 
+export const VALID_OUTGOING_VERSIONS = ["2.0", "3.0", "3.1", "4.0", "4.1", "4.2"];
+
 const DEFAULT_EXECUTEQUERYASYNC_BODY =
     `{    "dialogID": "156",
     "startDate": "2017-01-01T00:00:00.000Z",

@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import {
     REQUESTOBJECTS,
-    MISSING_API_KEY_MSG
+    MISSING_API_KEY_MSG,
+    VALID_OUTGOING_VERSIONS
 } from "./Constants";
 import { ErrorMsg } from "./ErrorMsg";
 import { Loading } from "./Loading";
@@ -15,8 +16,7 @@ function App() {
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
     let requests = REQUESTOBJECTS;
-
-    let mdoTest = REQUESTOBJECTS.map((item) => <li> key=item.request id=item.request displayText=item.displayText</li>);
+    let validOutgoingVersions = VALID_OUTGOING_VERSIONS;
 
     // State Hooks
     const [loading, setLoading] = useState(false);          // Loading indicator (true when query is in progress)
@@ -35,7 +35,7 @@ function App() {
     const requestType = useTrait(REQUESTOBJECTS[0].requestType);  // POST or GET
     const queryHeight = useTrait((query.get().split(/\n/)).length);  // determines how high to make the request textarea
     const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
-    const outgoingVersion = useTrait("0.0");  // for the switch-spec-version request
+    const outgoingVersionIndex = useTrait(0);  // for the switch-spec-version request
 
     const setUserFields = (item, index) => {
         query.set(REQUESTOBJECTS[index].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));
@@ -46,10 +46,7 @@ function App() {
         requestType.set(REQUESTOBJECTS[index].requestType);
         notes.set(REQUESTOBJECTS[index].notes);
         results.set("");
-        if (item.request === "Wzdx/switch-spec-version") {
-            outgoingVersion.set(outgoingVersion.get());
-        }
-        else { outgoingVersion.set("0.0") };
+        outgoingVersionIndex.set(0);
 
         console.log(`The setUserFields method has been called with ${item} at ${index}`);
         console.log('URL: ', url.get());
@@ -81,9 +78,7 @@ function App() {
         results.set("");
         reqStatus.set("");
 
-        if (url.get() === "Wzdx/switch-spec-version") {
-            url.set(`${url.get}?outgoingVersion=${outgoingVersion.get()}`);
-        }
+
 
         console.log("before trying to set the submittedUrl, you have this: ", submittedUrl.get());
         console.log("and the url is this: ", url.get());
@@ -91,10 +86,9 @@ function App() {
         console.log(` and the bool is this:  ${requestType.get() === "POST"}`);
 
 
-        if (requestType.get() !== "POST") {
-            submittedUrl.set(`${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`);
-        }
         submittedUrl.set(
+            request.get() === "Wzdx/switch-spec-version" ? `${url.get()}?outgoingVersion=${validOutgoingVersions[outgoingVersionIndex.get()]}`
+                :
             requestType.get() === "POST"
                 ? url.get()
                 : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
@@ -162,7 +156,7 @@ function App() {
         <>
             {console.log(`RETURN has been called and these are the values: ${url.get()}, ${requestType.get()}, ${queryHeight.get()}, ${notes.get()}`)}
         <div className="container">
-            <div className="jumbotron">
+                <div className="jumbotron">
                 {/* Header */}
                 <div className="App">
                         <h4>Guide to making Postman requests for SDx</h4>
@@ -222,46 +216,25 @@ function App() {
                     <br />
                     </div>
                     {request.get() === "Wzdx/switch-spec-version" &&
-                        <div className="form-group">
-                            <label htmlFor="outgoingVersion">Outgoing Version</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                value={outgoingVersion.get()}
-                                onChange={e => outgoingVersion.set(e.target.value)}
-                            />
-                        </div>
-                    }
-                    {/* Body */}
-                    {/* At least one GET, "GetAllITISCodes" does not have any query arguments so don't display "Query Arguments" or the textarea when query.get().length === 0*/}
-                <>
-                        {
-                            requestType.get() === "POST" &&
-                        <h5>Body of Request</h5>
-                        }
-                        {
-                            requestType.get() !== "POST" && query.get().length > 0 &&
-                            <h5>Query Arguments</h5>
-                        }
-                        {
-                            query.get().length > 0 &&
-                            <div className="form-group">
-                                <textarea
-                                    className="form-control"
-                                rows={queryHeight.get()}
-                                value={query.get()}
-                                onChange={e => query.set(e.target.value)}
-                                    />
+                        <>
+                        Desired Outgoing Version
+                        <div className="outgoing=version-radio-buttons">
+                            {validOutgoingVersions.map((item, index) => (
+                                <div>
+                                    <input key={item} defaultChecked={outgoingVersionIndex.get() === index} type="radio" name="query-type" value={item} onClick={() => outgoingVersionIndex.set(index)} />
+                                    <label htmlFor="item">&nbsp;&nbsp;{item}</label>
                                 </div>
-                        }
-                </>
-                <button
-                    type="button"
-                    className="btn btn-primary float-right"
-                    onClick={fetchData}
+                            ))}
+                        </div>
+                    </>
+                    }
+                    <button
+                        type="button"
+                        className="btn btn-primary float-right"
+                        onClick={fetchData}
                         disabled={appError.get() !== null || loading}
-                >
-                    {loading ? <Loading /> : "Submit"}
+                    >
+                        {loading ? <Loading /> : "Submit"}
                     </button>
                     {results.get().length > 0 && <>
                         <h5 style={{ clear: "both" }}>Results</h5>
@@ -283,6 +256,29 @@ function App() {
                         </div>
                     </>
                     }
+                    {/* Body */}
+                    {/* At least one GET, "GetAllITISCodes" does not have any query arguments so don't display "Query Arguments" or the textarea when query.get().length === 0*/}
+                    <>
+                        {
+                            requestType.get() === "POST" &&
+                            <h5>Body of Request</h5>
+                        }
+                        {
+                            requestType.get() !== "POST" && query.get().length > 0 &&
+                            <h5>Query Arguments</h5>
+                        }
+                        {
+                            query.get().length > 0 &&
+                            <div className="form-group">
+                                <textarea
+                                    className="form-control"
+                                    rows={queryHeight.get()}
+                                    value={query.get()}
+                                    onChange={e => query.set(e.target.value)}
+                                />
+                            </div>
+                        }
+                    </>
             </div>
             </div >
         </>
