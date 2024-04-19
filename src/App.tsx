@@ -132,7 +132,7 @@ function App() {
                 <div className="jumbotron">
                 {/* Header */}
                 <div className="App">
-                        <h4>Guide to making Postman requests for SDx</h4>
+                        <h4>SDx API Query Examples</h4>
                     <p className="lead">
                         Please refer to <a href={baseUrl}>{baseUrl}</a> for documentation.
                     </p>
@@ -192,7 +192,7 @@ function App() {
                         <div className="outgoing=version-radio-buttons">
                             {validOutgoingVersions.map((item, index) => (
                                 <div>
-                                    <input key={item} defaultChecked={outgoingVersionIndex.get() === index} type="radio" name="query-type" value={item} onClick={() => outgoingVersionIndex.set(index)} />
+                                    <input key={item} defaultChecked={outgoingVersionIndex.get() === index} type="radio" name="outgoing-version" value={item} onClick={() => outgoingVersionIndex.set(index)} />
                                     <label htmlFor="item">&nbsp;&nbsp;{item}</label>
                                 </div>
                             ))}
@@ -228,7 +228,6 @@ function App() {
                     </>
                     }
                     {/* Body */}
-                    {/* At least one GET, "GetAllITISCodes" does not have any query arguments so don't display "Query Arguments" or the textarea when query.get().length === 0*/}
                     <>
                         {
                             requestType.get() === "POST" &&
