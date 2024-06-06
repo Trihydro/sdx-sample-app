@@ -81,7 +81,7 @@ const DEFAULT_DECODE_BODY = `
 
 const DEFAULT_WZDX_POSTALABBREVIATION_QUERYARGUMENTS =
 `?
-postalabbreviation=MA`;
+postalAbbreviation=MA`;
 
 const DEFAULT_WZDX_SPECIFICLOCATION_QUERYARGUMENTS =
 `?
@@ -100,6 +100,13 @@ export const REQUESTOBJECTS = [
         notes: "Alternatives to GetData are GetBundles and GetDistributions."
     },
     {
+        displayText: "GetDataByRecordId",
+        request: "GetDataByRecordId",
+        requestType: "POST",
+        defaultQueryOrBody: DEFAULT_GETDATABYRECORDID_POST_BODY,
+        notes: "Type is 0 for hex and 1 for decimal."
+    },
+    {
         displayText: "GetDecodedMessages",
         request: "GetDecodedMessages",
         requestType: "POST",
@@ -112,13 +119,6 @@ export const REQUESTOBJECTS = [
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_EXECUTEQUERYASYNC_BODY,
         notes: "Returns advisory messages as a GeoJSON FeatureCollection with ITIS codes."
-    },
-    {
-        displayText: "GetDataByRecordId",
-        request: "GetDataByRecordId",
-        requestType: "POST",
-        defaultQueryOrBody: DEFAULT_GETDATABYRECORDID_POST_BODY,
-        notes: "Type is 0 for hex and 1 for decimal."
     },
     {
         displayText: "GetMessagesBetweenPlaces",

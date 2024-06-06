@@ -36,6 +36,7 @@ function App() {
     const queryHeight = useTrait((query.get().split(/\n/)).length);  // determines how high to make the request textarea
     const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
     const outgoingVersionIndex = useTrait(0);  // for the switch-spec-version request
+    const genericSampleAppUrl = useTrait("");
 
     const setUserFields = (item: { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion?: undefined; } | { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion: string; }, index: number) => {
         query.set(REQUESTOBJECTS[index].defaultQueryOrBody.replace("QQQ", new Date().toISOString()));
@@ -71,14 +72,25 @@ function App() {
         submittedUrl.set(
             request.get() === "Wzdx/switch-spec-version" ? `${url.get()}?outgoingVersion=${validOutgoingVersions[outgoingVersionIndex.get()]}`
                 :
-            requestType.get() === "POST"
-                ? url.get()
-                : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
+                requestType.get() === "POST"
+                    ? url.get()
+                    : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
         );
 
+        // note the inclusion of the '<' symbols.  These are necessary delimiters.
+        // '<' is a reliable delimiter because '<' is disallowed in the URI so it is a guarantee that the 
+        // first and second '<' are separating the URI from the requestType from the query.
+        // It is not a guarantee that there will not be '<' inside the body of a post so RestService
+        // cannot string split by '<'
+        genericSampleAppUrl.set(`${baseUrl}/api/GenericSampleAppEndpoint?base64EncodedArguments=`
+            .concat(btoa(`${submittedUrl.get()}<${requestType.get()}<${query.get().replace(/(\r\n|\n|\r)/gm, "")}`),));
+
+        console.log(`GenericSampleAppEndpoint has been called with ${genericSampleAppUrl.get()}`);
+
+        // check-json-feed must be called directly from the controller due to the repeated TryValidateModel in this method
         try {
-            const response =
-                requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
+            const response = request.get() == "Wzdx/check-json-feed" ?
+                await fetch(`${submittedUrl.get()}`, {
                     method: requestType.get(),
                     mode: "cors",
                     cache: "no-cache",
@@ -87,17 +99,16 @@ function App() {
                         "apikey": process.env.REACT_APP_API_KEY as string
                     },
                     body: query.get()
-                })
-                    : await fetch(`${submittedUrl.get()}`, {
-                        method: requestType.get(),
-                        mode: "cors",
-                        cache: "no-cache",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "apikey": process.env.REACT_APP_API_KEY as string
-                        }
-                    })
-                ;
+                }) :
+                await fetch(genericSampleAppUrl.get(), {
+                    method: "GET",
+                    mode: "cors",
+                    cache: "no-cache",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": process.env.REACT_APP_API_KEY as string
+                    }
+                });
 
             let earlyResults = await response.text();
 

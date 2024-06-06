@@ -14,6 +14,7 @@ A simple, single-page React application to showcase the structure of queries to 
 4. Select __API Access__
 5. Use the _Generate New API Key_ options to __Generate__ an API Key
 6. Record your new API Key
+
 ## Setup
 1. Clone this repository
 2. Install dependencies using `yarn install`
