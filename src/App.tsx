@@ -177,6 +177,12 @@ function App() {
             appError.set(`An error has occurred: ${ex}`);
         }
 
+        console.log(`${results.get()}`);
+        console.log("XXXXX");
+        console.log(`${JSON.parse(results.get())}`);
+        console.log("XXXXX");
+        console.log(`${JSON.stringify(Object.assign({}, JSON.parse(results.get())), null, 4)}`);
+
         // Request is finished, reset loading indicator
         setLoading(false);
     };
@@ -210,7 +216,7 @@ function App() {
                 </div>
                 <div className="col-sm-9">
                     <div className="container">
-                        <div className="jumbotron">
+                        <div>
                             {/* Header */}
                             <div className="App">
                                 <h4>SDx API Query Examples</h4>
@@ -275,26 +281,32 @@ function App() {
                                             <h5>
                                                 <b>{requestType.get()}</b> with this Request URL:
                                             </h5>
-                                            <textarea
-                                                readOnly
-                                                id="submittedUrl"
-                                                className="form-control"
-                                                rows={requestType.get() === "POST" ? 1 : 2}
-                                                style={
-                                                    reqStatus.get().includes("400")
-                                                        ? { backgroundColor: "#f8d7da" }
-                                                        : {}
-                                                }
-                                                value={submittedUrl.get()}
-                                            />
-                                            <button
-                                                className="btn btn-secondary"
-                                                onClick={() =>
-                                                    navigator.clipboard.writeText(submittedUrl.get())
-                                                }
-                                            >
-                                                Copy
-                                            </button>
+                                            <div className="row">
+                                                <div className="col-sm-11 pr-0">
+                                                    <textarea
+                                                        readOnly
+                                                        id="submittedUrl"
+                                                        className="form-control"
+                                                        rows={requestType.get() === "POST" ? 1 : 2}
+                                                        style={
+                                                            reqStatus.get().includes("400")
+                                                                ? { backgroundColor: "#f8d7da" }
+                                                                : {}
+                                                        }
+                                                        value={submittedUrl.get()}
+                                                    />
+                                                </div>
+                                                <div className="col-sm-1 pl-0">
+                                                    <button
+                                                        className="btn btn-secondary"
+                                                        onClick={() =>
+                                                            navigator.clipboard.writeText(submittedUrl.get())
+                                                        }
+                                                    >
+                                                        Copy
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </>
                                 )}
@@ -334,7 +346,7 @@ function App() {
                                                     ? { backgroundColor: "#f8d7da" }
                                                     : {}
                                             }
-                                            value={JSON.stringify(Object.assign({}, JSON.parse(results.get())), null, 4)}
+                                            value={JSON.stringify(JSON.parse(results.get()), undefined, 4)}
                                         />
                                         <small className="float-left">{reqStatus.get()}</small>
                                         <small className="float-right">
