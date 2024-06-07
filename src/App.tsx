@@ -184,7 +184,7 @@ function App() {
     return (
         <>
             <div className="row">
-                <div className="col-sm-4">
+                <div className="col-sm-3">
                     <div className="card">
                         <div className="card-body">
                             <div className="radio-buttons">
@@ -208,7 +208,7 @@ function App() {
                         </div>
                     </div>
                 </div>
-                <div className="col-sm-8">
+                <div className="col-sm-9">
                     <div className="container">
                         <div className="jumbotron">
                             {/* Header */}
