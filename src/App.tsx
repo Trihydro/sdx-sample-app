@@ -334,7 +334,7 @@ function App() {
                                                     ? { backgroundColor: "#f8d7da" }
                                                     : {}
                                             }
-                                            value={results.get()}
+                                            value={JSON.stringify(Object.assign({}, JSON.parse(results.get())), null, 4)}
                                         />
                                         <small className="float-left">{reqStatus.get()}</small>
                                         <small className="float-right">
