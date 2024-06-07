@@ -36,6 +36,7 @@ function App() {
     const queryHeight = useTrait((query.get().split(/\n/)).length);  // determines how high to make the request textarea
     const notes = useTrait(REQUESTOBJECTS[0].notes);  // a brief explanation to the User
     const outgoingVersionIndex = useTrait(0);  // for the switch-spec-version request
+    const displayText = useTrait(REQUESTOBJECTS[0].displayText);  //the request that was selected in plain English
     const genericSampleAppUrl = useTrait("");
 
     const setUserFields = (item: { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion?: undefined; } | { displayText: string; request: string; requestType: string; defaultQueryOrBody: string; notes: string; outgoingVersion: string; }, index: number) => {
@@ -48,6 +49,7 @@ function App() {
         notes.set(REQUESTOBJECTS[index].notes);
         results.set("");
         outgoingVersionIndex.set(0);
+        displayText.set(REQUESTOBJECTS[index].displayText);
     }
 
     /**
@@ -139,6 +141,23 @@ function App() {
 
     return (
         <>
+            <div className="row">
+                <div className="col-sm-4">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="radio-buttons">
+                                {requests.map((item, index) => (
+                                    <div>
+                                        <label htmlFor={index.toString()} >
+                                            <input key={index} id={index.toString()} defaultChecked={selectedIndex.get() === index} type="radio" name="query-type" value={item.displayText} onClick={() => setUserFields(item, index)} />
+                                            &nbsp;&nbsp;{item.displayText}</label>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-sm-8">
         <div className="container">
                 <div className="jumbotron">
                 {/* Header */}
@@ -149,30 +168,23 @@ function App() {
                     </p>
                     <hr />
                 </div>
-                    {appError.get() !== null && <ErrorMsg msg={appError.get()} />}
-                <div className="radio-buttons">
-                    {requests.map((item, index) => (
-                        <div>
-                            <input key={index} defaultChecked={selectedIndex.get() === index} type="radio" name="query-type" value={item.displayText} onClick={() => setUserFields(item, index)} />
-                            <label htmlFor="item">&nbsp;&nbsp;{item.displayText}</label>
-                        </div>
-                    ))}                    
-                </div>
-                    {notes.get() &&
-                        <div className="form-group">
-                            <h5>Notes for this request:</h5>
-                            <textarea
-                                readOnly
-                                id="notes"
-                                className="form-control"
-                                rows={1}
-                                style={
-                                    reqStatus.get().includes("400") ? { backgroundColor: "#f8d7da" } : {}
-                                }
-                                value={notes.get()}
-                            />
-                        </div>
-                    }
+                            {appError.get() !== null && <ErrorMsg msg={appError.get()} />}
+                            <>
+                                <div>
+                                    <div>
+                                        {requestType.get() === "POST" &&
+                                            <div> <h4>{displayText.get()}<span className="ml-2 badge badge-success">{requestType.get()}</span></h4></div>}
+                                        {requestType.get() === "GET" && <div> <h4>{displayText.get()}<span className="ml-2 badge badge-primary">{requestType.get()}</span></h4></div>}
+                                    </div>
+                                    <div className="input-group mb-3">
+                                        <input readOnly id="notes" className="form-control" placeholder={notes.get()}></input>
+                                        <div className="input-group-append">
+                                            <button type="button" className="btn btn-primary" onClick={fetchData}
+                                                disabled={appError.get() !== null || loading}
+                                            >{loading ? <Loading /> : "Generate Request"}</button>
+                                        </div></div>
+                                </div>
+                            </>
                 <div>
                         <br />
                         {results.get().length > 0 && <>
@@ -188,13 +200,10 @@ function App() {
                                     }
                                     value={submittedUrl.get()}
                                 />
+                                        <button className="btn btn-secondary" onClick={() => navigator.clipboard.writeText(submittedUrl.get())}>Copy</button>
                             </div>
                         </>
-                        }
-                        {results.get().length === 0 && <>
-                            <h5>The request will display when you click 'Submit'</h5>
-                        </>
-                        }
+                                }
                     <br />
                     </div>
                     {request.get() === "Wzdx/switch-spec-version" &&
@@ -209,15 +218,7 @@ function App() {
                             ))}
                         </div>
                     </>
-                    }
-                    <button
-                        type="button"
-                        className="btn btn-primary float-right"
-                        onClick={fetchData}
-                        disabled={appError.get() !== null || loading}
-                    >
-                        {loading ? <Loading /> : "Submit"}
-                    </button>
+                            }
                     {results.get().length > 0 && <>
                         <h5 style={{ clear: "both" }}>Results</h5>
                         <div className="form-group">
@@ -261,6 +262,8 @@ function App() {
                         }
                     </>
             </div>
+            </div >
+                </div >
             </div >
         </>
     );
