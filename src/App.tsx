@@ -11,6 +11,8 @@ import useTrait from "./UseTrait";
 
 function App() {
     const keyMissing = !process.env.REACT_APP_API_KEY;
+    // Note that urlMissing must NOT have a trailing slash nor /index.html
+    // Either a trailing slash or /index.html will cause CORS to fail!
     const urlMissing = !process.env.REACT_APP_URL;
     const baseUrl = urlMissing
         ? "https://sdx-service.trihydro.com"
@@ -44,7 +46,6 @@ function App() {
     const notes = useTrait(REQUESTOBJECTS[0].notes); // a brief explanation to the User
     const outgoingVersionIndex = useTrait(0); // for the switch-spec-version request
     const displayText = useTrait(REQUESTOBJECTS[0].displayText); //the request that was selected in plain English
-    const genericSampleAppUrl = useTrait("");
 
     const setUserFields = (
         item:
@@ -111,54 +112,47 @@ function App() {
                     : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
         );
 
-        // note the inclusion of the '<' symbols.  These are necessary delimiters.
-        // '<' is a reliable delimiter because '<' is disallowed in the URI so it is a guarantee that the
-        // first and second '<' are separating the URI from the requestType from the query.
-        // It is not a guarantee that there will not be '<' inside the body of a post so RestService
-        // cannot string split by '<'
-        genericSampleAppUrl.set(
-            `${baseUrl}/api/GenericSampleAppEndpoint?base64EncodedArguments=`.concat(
-                btoa(
-                    `${submittedUrl.get()}<${requestType.get()}<${query
-                        .get()
-                        .replace(/(\r\n|\n|\r)/gm, "")}`
-                )
-            )
-        );
+        console.log("The submittedUrl is this: ", submittedUrl.get());
+        console.log("and the url is this: ", url.get());
+        console.log(` and the requestType is this:  XX${requestType.get()}XX`);
+        console.log(` and the bool is this:  ${requestType.get() === "POST"}`);
 
-        console.log(
-            `GenericSampleAppEndpoint has been called with ${genericSampleAppUrl.get()}`
-        );
-
-        // check-json-feed must be called directly from the controller due to the repeated TryValidateModel in this method
         try {
+            console.log(`Here you have ${submittedUrl.get()}`);
+            console.log(`And the requestType = ${requestType.get()}`);
+
             const response =
-                request.get() == "Wzdx/check-json-feed"
-                    ? await fetch(`${submittedUrl.get()}`, {
+                requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
+                    method: requestType.get(),
+                    mode: "cors",
+                    cache: "no-cache",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "apikey": process.env.REACT_APP_API_KEY as string
+                    },
+                    body: query.get()
+                })
+                    : await fetch(`${submittedUrl.get()}`, {
                         method: requestType.get(),
                         mode: "cors",
                         cache: "no-cache",
                         headers: {
                             "Content-Type": "application/json",
-                            apikey: process.env.REACT_APP_API_KEY as string,
-                        },
-                        body: query.get(),
+                            "apikey": process.env.REACT_APP_API_KEY as string
+                        }
                     })
-                    : await fetch(genericSampleAppUrl.get(), {
-                        method: "GET",
-                        mode: "cors",
-                        cache: "no-cache",
-                        headers: {
-                            "Content-Type": "application/json",
-                            apikey: process.env.REACT_APP_API_KEY as string,
-                        },
-                    });
+                ;
 
             let earlyResults = await response.text();
 
             if (response.status === 200 && earlyResults.length === 0) {
                 earlyResults = "No results returned";
             }
+
+            console.log(`Here is the status: ${response.status} `);
+            console.log(`Here is the statusText: ${response.statusText}`);
+
+            console.log(`this is being returned: ${earlyResults.substring(0, 30)}`);
 
             // After receiving a response, update the HTTP status code
             reqStatus.set(`Status: ${response.status} ${response.statusText}`);
@@ -176,12 +170,6 @@ function App() {
         } catch (ex) {
             appError.set(`An error has occurred: ${ex}`);
         }
-
-        console.log(`${results.get()}`);
-        console.log("XXXXX");
-        console.log(`${JSON.parse(results.get())}`);
-        console.log("XXXXX");
-        console.log(`${JSON.stringify(Object.assign({}, JSON.parse(results.get())), null, 4)}`);
 
         // Request is finished, reset loading indicator
         setLoading(false);
