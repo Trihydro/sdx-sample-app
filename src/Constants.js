@@ -26,12 +26,6 @@ const DEFAULT_EXECUTEQUERYASYNC_BODY =
     "limit": "10"
 }`;
 
-const DEFAULT_GETDATABYRECORDID_POST_BODY =
-    `{
-    "RecordId": "-840350048",
-    "type": 1
-}`;
-
 // this is the road from Sheridan, WY to Cheyenne, WY so it should have a lot of messages
 const DEFAULT_GETMESSAGESBETWEENPLACES_QUERYARGUMENTS =
 `?
@@ -98,13 +92,6 @@ export const REQUESTOBJECTS = [
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_EXECUTEQUERYASYNC_BODY,
         notes: "Alternatives to GetData are GetBundles and GetDistributions."
-    },
-    {
-        displayText: "GetDataByRecordId",
-        request: "GetDataByRecordId",
-        requestType: "POST",
-        defaultQueryOrBody: DEFAULT_GETDATABYRECORDID_POST_BODY,
-        notes: "Type is 0 for hex and 1 for decimal."
     },
     {
         displayText: "GetDecodedMessages",
