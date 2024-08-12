@@ -181,7 +181,8 @@ export const REQUESTOBJECTS = [
         request: "deposit-multi",
         requestType: "POST",
         defaultQueryOrBody: DEFAULT_DEPOSITMULTI_BODY,
-        notes: "This method requires permissions to use.  To enable DepositMulti, please contact Trihydro.  Allows deposit of multiple TIMs."
+        forbiddenNotes: "This method requires permissions to use.  To enable DepositMulti, please contact Trihydro.  Allows deposit of multiple TIMs.",
+        notes: "Accepts a JSON array of {encodeType, encodedMsg}"
     }
 ];
 

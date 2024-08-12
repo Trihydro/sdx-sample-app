@@ -29,10 +29,10 @@ function App() {
     const [canUserDeposit, setCanUserDeposit] = useState(false);
     useEffect(() => {
         console.log("Triggered the useEffect.");
+        console.log(`${baseUrl}/api/GetCanUserDeposit`);
         const fetchData = async () => {
             try {
-                console.log("Here you are inside the useEffect that doesn't seem to be working yet.")
-                const response = await fetch('https://localhost:5001/api/GetCanUserDeposit', {
+                const response = await fetch(`${baseUrl}/api/GetCanUserDeposit`, {
                     method: 'GET',
                     mode: 'cors',
                     cache: 'no-cache',
@@ -41,10 +41,8 @@ function App() {
                         'apikey': process.env.REACT_APP_API_KEY as string
                     }
                 });
-                const status = await response.status;
-                setCanUserDeposit(status === 200);
-                console.log("The return was: ");
-                console.log(status === 200);
+                const data = await response.json();
+                setCanUserDeposit(data === "Yep");
             }
             catch (error) {
                 console.error('Error fetching data:', error);
@@ -84,6 +82,7 @@ function App() {
                 requestType: string;
                 defaultQueryOrBody: string;
                 notes: string;
+                forbiddenNotes?: undefined;
                 outgoingVersion?: undefined;
             }
             | {
@@ -92,7 +91,17 @@ function App() {
                 requestType: string;
                 defaultQueryOrBody: string;
                 notes: string;
+                forbiddenNotes?: undefined;
                 outgoingVersion: string;
+            }
+            | {
+                displayText: string;
+                request: string;
+                requestType: string;
+                defaultQueryOrBody: string;
+                notes: string;
+                forbiddenNotes: string;
+                outgoingVersion?: undefined;
             },
         index: number
     ) => {
@@ -107,7 +116,12 @@ function App() {
         url.set(`${baseUrl}/api/${item.request}`);
         request.set(item.request);
         requestType.set(REQUESTOBJECTS[index].requestType);
-        notes.set(REQUESTOBJECTS[index].notes);
+        if (request.get() === "deposit-multi" && !canUserDeposit) {
+            notes.set(REQUESTOBJECTS[index].forbiddenNotes);
+        }
+        else {
+            notes.set(REQUESTOBJECTS[index].notes)
+        }
         results.set("");
         outgoingVersionIndex.set(0);
         displayText.set(REQUESTOBJECTS[index].displayText);
