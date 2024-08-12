@@ -28,21 +28,31 @@ function App() {
     const [loading, setLoading] = useState(false); // Loading indicator (true when query is in progress)
     const [canUserDeposit, setCanUserDeposit] = useState(false);
     useEffect(() => {
-        fetch('GetCanUserDeposit', {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json',
-                'apikey': process.env.REACT_APP_API_KEY as string
+        console.log("Triggered the useEffect.");
+        const fetchData = async () => {
+            try {
+                console.log("Here you are inside the useEffect that doesn't seem to be working yet.")
+                const response = await fetch('https://localhost:5001/api/GetCanUserDeposit', {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': process.env.REACT_APP_API_KEY as string
+                    }
+                });
+                const status = await response.status;
+                setCanUserDeposit(status === 200);
+                console.log("The return was: ");
+                console.log(status === 200);
             }
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    setCanUserDeposit(true);
-                }
-            })
-    }, [canUserDeposit]);
+            catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+        fetchData();
+        console.log("Reached the end of useEffect.");
+    }, [])
 
     // very important note:  set<xxx> in useState is asynchronous, so the value of xxx will not be updated immediately.
     // We need the synchronous value.  We are using useTrait from https://dev.to/bytebodger/synchronous-state-with-react-hooks-1k4f
