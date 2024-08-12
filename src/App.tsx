@@ -42,7 +42,7 @@ function App() {
                     setCanUserDeposit(true);
                 }
             })
-    })
+    }, [canUserDeposit]);
 
     // very important note:  set<xxx> in useState is asynchronous, so the value of xxx will not be updated immediately.
     // We need the synchronous value.  We are using useTrait from https://dev.to/bytebodger/synchronous-state-with-react-hooks-1k4f
@@ -107,23 +107,10 @@ function App() {
      * This method handles fetching data from the SDX, using the provided query
      */
     const fetchData = async () => {
-        if (request.get() === "deposit-multi") {
-            await fetch('GetCanUserDeposit', {
-                method: 'GET',
-                mode: 'cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'apikey': process.env.REACT_APP_API_KEY as string
-                }
-            })
-                .then(response => {
-                    console.log("Status equals", response.status);
-                    if (response.status !== 200) {
+        console.log("The request is this: ", request.get());
+        if (request.get() === "deposit-multi" && !canUserDeposit) {
                         alert("To have the DepositMulti function enabled, you will need to contact Trihydro.");
-                        return;
-                    }
-                })
+            return;
         }
         if (requestType.get() === "POST") {
             // Verify query is valid JSON
