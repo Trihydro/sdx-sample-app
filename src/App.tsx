@@ -28,8 +28,6 @@ function App() {
     const [loading, setLoading] = useState(false); // Loading indicator (true when query is in progress)
     const [canUserDeposit, setCanUserDeposit] = useState(false);
     useEffect(() => {
-        console.log("Triggered the useEffect.");
-        console.log(`${baseUrl}/api/GetCanUserDeposit`);
         const fetchData = async () => {
             try {
                 const response = await fetch(`${baseUrl}/api/GetCanUserDeposit`, {
@@ -42,14 +40,13 @@ function App() {
                     }
                 });
                 const data = await response.json();
-                setCanUserDeposit(data === "Yep");
+                setCanUserDeposit(data === true);
             }
             catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
-        console.log("Reached the end of useEffect.");
     }, [])
 
     // very important note:  set<xxx> in useState is asynchronous, so the value of xxx will not be updated immediately.
@@ -131,7 +128,6 @@ function App() {
      * This method handles fetching data from the SDX, using the provided query
      */
     const fetchData = async () => {
-        console.log("The request is this: ", request.get());
         if (request.get() === "deposit-multi" && !canUserDeposit) {
                         alert("To have the DepositMulti function enabled, you will need to contact Trihydro.");
             return;
@@ -160,15 +156,7 @@ function App() {
                     : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
         );
 
-        console.log("The submittedUrl is this: ", submittedUrl.get());
-        console.log("and the url is this: ", url.get());
-        console.log(` and the requestType is this:  XX${requestType.get()}XX`);
-        console.log(` and the bool is this:  ${requestType.get() === "POST"}`);
-
         try {
-            console.log(`Here you have ${submittedUrl.get()}`);
-            console.log(`And the requestType = ${requestType.get()}`);
-
             const response =
                 requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
                     method: requestType.get(),
@@ -196,11 +184,6 @@ function App() {
             if (response.status === 200 && earlyResults.length === 0) {
                 earlyResults = "No results returned";
             }
-
-            console.log(`Here is the status: ${response.status} `);
-            console.log(`Here is the statusText: ${response.statusText}`);
-
-            console.log(`this is being returned: ${earlyResults.substring(0, 30)}`);
 
             // After receiving a response, update the HTTP status code
             reqStatus.set(`Status: ${response.status} ${response.statusText}`);
