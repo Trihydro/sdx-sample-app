@@ -3,7 +3,7 @@ A simple, single-page React application to showcase the structure of queries to 
 
 ## Prerequisites
 - Node.js (available at [https://nodejs.org/](https://nodejs.org/))
-- Yarn
+- Yarn (this requires Yarn 1 which can currently be found here:  https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
 - Chrome or Firefox
 
 ## Generate an API Key
@@ -14,6 +14,7 @@ A simple, single-page React application to showcase the structure of queries to 
 4. Select __API Access__
 5. Use the _Generate New API Key_ options to __Generate__ an API Key
 6. Record your new API Key
+
 ## Setup
 1. Clone this repository
 2. Install dependencies using `yarn install`
@@ -23,9 +24,10 @@ A simple, single-page React application to showcase the structure of queries to 
 ```
 REACT_APP_API_KEY=<api-key>
 ```
-4. Start the application using `yarn start`
+
+5. Start the application using `yarn start`
 
 After starting, the application should automatically load in your browser. If not, navigate to [http://localhost:3000/](http://localhost:3000/). Note that the SDX application is set up to accept traffic from this application on port 3000 only. Other ports will fail CORS.
 
 ## Usage
-Use the Query text area to modify query parameters. After a query is ran, results are displayed in the Results area.
+Use the Query text area to modify query parameters. After a query has been run, results are displayed in the Results area.
