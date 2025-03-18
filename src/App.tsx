@@ -15,10 +15,7 @@ function App() {
     // Either a trailing slash or /index.html will cause CORS to fail!
     // Use .replace(/\/$/, "").replace(/\/$/, "") instead of simply .replace(/\/+$/, "")
     // because .replace(/\/+$/, "") can be susceptible to Regex Denial of Service attacks.
-    const urlMissing = !process.env.REACT_APP_URL;
-    const baseUrl = urlMissing
-        ? "https://sdx-service.trihydro.com"
-        : process.env.REACT_APP_URL?.replace('index.html', '').replace(/\/$/, "").replace(/\/$/, "");
+    const baseUrl = process.env.REACT_APP_URL?.replace('index.html', '').replace(/\/$/, "").replace(/\/$/, "");
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
     let requests = REQUESTOBJECTS;
