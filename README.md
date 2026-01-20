@@ -29,8 +29,8 @@ DO NOT INCLUDE A TRAILING SLASH ON THE REACT_APP_URL!
 DO NOT INCLUDE index.html  
 **Either a trailing slash or /index.html will cause CORS to fail!**  
 ```
-REACT_APP_API_KEY=<insert your apikey here>
-REACT_APP_URL=https://sdxbeta-service.trihydro.com
+VITE_API_KEY=<insert your apikey here>
+VITE_URL=https://sdxbeta-service.trihydro.com
 ```
 
 5. Start the application using `yarn start`

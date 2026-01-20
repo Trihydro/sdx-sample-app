@@ -4,18 +4,18 @@ import {
     REQUESTOBJECTS,
     MISSING_API_KEY_MSG,
     VALID_OUTGOING_VERSIONS,
-} from "./Constants";
-import { ErrorMsg } from "./ErrorMsg";
-import { Loading } from "./Loading";
-import useTrait from "./UseTrait";
+} from "./Constants.jsx";
+import { ErrorMsg } from "./ErrorMsg.jsx";
+import { Loading } from "./Loading.jsx";
+import useTrait from "./UseTrait.jsx";
 
 function App() {
-    const keyMissing = !process.env.REACT_APP_API_KEY;
-    // Note that process.env.REACT_APP_URL must NOT have a trailing slash nor /index.html
+    const keyMissing = !import.meta.env.VITE_API_KEY;
+    // Note that import.meta.env.VITE_URL must NOT have a trailing slash nor /index.html
     // Either a trailing slash or /index.html will cause CORS to fail!
     // Use .replace(/\/$/, "").replace(/\/$/, "") instead of simply .replace(/\/+$/, "")
     // because .replace(/\/+$/, "") can be susceptible to Regex Denial of Service attacks.
-    const baseUrl = process.env.REACT_APP_URL?.replace('index.html', '').replace(/\/$/, "").replace(/\/$/, "");
+    const baseUrl = import.meta.env.VITE_URL?.replace('index.html', '').replace(/\/$/, "").replace(/\/$/, "");
     const initialError = keyMissing ? MISSING_API_KEY_MSG : null;
 
     let requests = REQUESTOBJECTS;
@@ -33,7 +33,7 @@ function App() {
                     cache: 'no-cache',
                     headers: {
                         'Content-Type': 'application/json',
-                        'apikey': process.env.REACT_APP_API_KEY as string
+                        'apikey': import.meta.env.VITE_API_KEY as string
                     }
                 });
                 const data = await response.json();
@@ -161,7 +161,7 @@ function App() {
                     cache: "no-cache",
                     headers: {
                         "Content-Type": "application/json",
-                        "apikey": process.env.REACT_APP_API_KEY as string
+                        "apikey": import.meta.env.VITE_API_KEY as string
                     },
                     body: query.get()
                 })
@@ -171,7 +171,7 @@ function App() {
                         cache: "no-cache",
                         headers: {
                             "Content-Type": "application/json",
-                            "apikey": process.env.REACT_APP_API_KEY as string
+                            "apikey": import.meta.env.VITE_API_KEY as string
                         }
                     })
                 ;
@@ -211,10 +211,9 @@ function App() {
                         <div className="card-body">
                             <div className="radio-buttons">
                                 {requests.map((item, index) => (
-                                    <div>
+                                    <div key={index}>
                                         <label htmlFor={index.toString()}>
                                             <input
-                                                key={index}
                                                 id={index.toString()}
                                                 defaultChecked={selectedIndex.get() === index}
                                                 type="radio"
@@ -222,7 +221,7 @@ function App() {
                                                 value={item.displayText}
                                                 onClick={() => setUserFields(item, index)}
                                             />
-                                            &nbsp;&nbsp;{item.displayText}
+                                            {' '}{' '}{item.displayText}
                                         </label>
                                     </div>
                                 ))}
@@ -333,16 +332,15 @@ function App() {
                                     Desired Outgoing Version
                                     <div className="outgoing=version-radio-buttons">
                                         {validOutgoingVersions.map((item, index) => (
-                                            <div>
+                                            <div key={index}>
                                                 <input
-                                                    key={item}
                                                     defaultChecked={outgoingVersionIndex.get() === index}
                                                     type="radio"
                                                     name="outgoing-version"
                                                     value={item}
                                                     onClick={() => outgoingVersionIndex.set(index)}
                                                 />
-                                                <label htmlFor="item">&nbsp;&nbsp;{item}</label>
+                                                <label htmlFor="item">{' '}{' '}{item}</label>
                                             </div>
                                         ))}
                                     </div>
