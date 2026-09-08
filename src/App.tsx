@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/// <reference types="vite/client" />
+import { useEffect, useState } from "react";
 import "./App.css";
 import {
     REQUESTOBJECTS,
@@ -8,6 +9,7 @@ import {
 import { ErrorMsg } from "./ErrorMsg.jsx";
 import { Loading } from "./Loading.jsx";
 import useTrait from "./UseTrait.jsx";
+import { buildSubmittedUrl, checkCanUserDeposit, sendSdxRequest } from "./sdxService";
 
 function App() {
     const keyMissing = !import.meta.env.VITE_API_KEY;
@@ -25,25 +27,16 @@ function App() {
     const [loading, setLoading] = useState(false); // Loading indicator (true when query is in progress)
     const [canUserDeposit, setCanUserDeposit] = useState(false);
     useEffect(() => {
-        const fetchData = async () => {
+        const checkDepositEligibility = async () => {
             try {
-                const response = await fetch(`${baseUrl}/api/GetCanUserDeposit`, {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': import.meta.env.VITE_API_KEY as string
-                    }
-                });
-                const data = await response.json();
-                setCanUserDeposit(data === true);
+                const canDeposit = await checkCanUserDeposit(baseUrl, import.meta.env.VITE_API_KEY as string);
+                setCanUserDeposit(canDeposit);
             }
             catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-        fetchData();
+        checkDepositEligibility();
     }, [])
 
     // very important note:  set<xxx> in useState is asynchronous, so the value of xxx will not be updated immediately.
@@ -144,54 +137,39 @@ function App() {
         results.set("");
         reqStatus.set("");
 
-        submittedUrl.set(
-            request.get() === "Wzdx/switch-spec-version"
-                ? `${url.get()}?outgoingVersion=${validOutgoingVersions[outgoingVersionIndex.get()]
-                }`
-                : requestType.get() === "POST"
-                    ? url.get()
-                    : `${url.get()}${query.get().replace(/(\r\n|\n|\r)/gm, "")}`
-        );
+        const newSubmittedUrl = buildSubmittedUrl({
+            request: request.get(),
+            requestType: requestType.get(),
+            url: url.get(),
+            query: query.get(),
+            outgoingVersion: validOutgoingVersions[outgoingVersionIndex.get()],
+        });
+        submittedUrl.set(newSubmittedUrl);
 
         try {
-            const response =
-                requestType.get() === "POST" ? await fetch(`${submittedUrl.get()}`, {
-                    method: requestType.get(),
-                    mode: "cors",
-                    cache: "no-cache",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "apikey": import.meta.env.VITE_API_KEY as string
-                    },
-                    body: query.get()
-                })
-                    : await fetch(`${submittedUrl.get()}`, {
-                        method: requestType.get(),
-                        mode: "cors",
-                        cache: "no-cache",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "apikey": import.meta.env.VITE_API_KEY as string
-                        }
-                    })
-                ;
+            const { status, statusText, text } = await sendSdxRequest({
+                submittedUrl: newSubmittedUrl,
+                requestType: requestType.get(),
+                apiKey: import.meta.env.VITE_API_KEY as string,
+                body: requestType.get() === "POST" ? query.get() : undefined,
+            });
 
-            let earlyResults = await response.text();
+            let earlyResults = text;
 
-            if (response.status === 200 && earlyResults.length === 0) {
+            if (status === 200 && earlyResults.length === 0) {
                 earlyResults = "No results returned";
             }
 
             // After receiving a response, update the HTTP status code
-            reqStatus.set(`Status: ${response.status} ${response.statusText}`);
+            reqStatus.set(`Status: ${status} ${statusText}`);
 
             // If the response is OK, we have results.
             // If the response was a Bad Request, we have information
             // about why the request was bad
-            if (response.status === 404) {
+            if (status === 404) {
                 results.set("404 Not Found");
             }
-            if (response.status === 200 || response.status === 400) {
+            if (status === 200 || status === 400) {
                 let returnedResults = earlyResults;
                 results.set(returnedResults);
             }

@@ -1,0 +1,4085 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App snapshots > matches the initial render with a configured API key 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  checked=""
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetData
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Alternatives to GetData are GetBundles and GetDistributions."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "Decode" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  checked=""
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  Decode
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Decodes advisory situation data."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="6"
+            >
+              
+{
+    "messageType": "AdvisorySituationData",
+    "encodeType": "hex",
+    "encodedMsg": "C440000000000000000711413AB8271E820616385BEB89C470CC45942BD4A00000000203282003F027AC0032C4FDE7F8EC962A1F8330C0056138DAB978B1E251AFFFFC46589FE805080FC271B572F163C4A3580325FFFE215E2A28885001CD78D638D0BD1F27E189112834053703D02F9A3EE0EA8178A0CDAA4B62B86590256C9C362EDA992A1BAD81766B0D3A76B52286189D50C0C321F030D1A1A7E3902B711DEE6E7E3680688283CCAC3594C998A41B4584AB820E4CA4492306F7812575022E9865C01C910082650DAD303FFC87086122B043648505DB81D480C858512218A4769D08741CD11CA048857A1D34601ED37078C912244FA7B9B789228213D587848AA641E6A241E52C4E1AB12335907FB23091314B3F3E9048DCA51E64A22480854F7487122FD467F689891AB623D5170492662A03D0E1486163BE0FDCAE851B87B937460CC3DF321D21A1454152980FEC94805C85C5BD42182C628BC4600190744C6258221000"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "GetData" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  checked=""
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetData
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Alternatives to GetData are GetBundles and GetDistributions."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "GetDecodedMessages" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  checked=""
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetDecodedMessages
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Returns advisory messages in a human-readable format."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "GetGeoJsonData" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  checked=""
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetGeoJsonData
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Returns advisory messages as a GeoJSON FeatureCollection with ITIS codes."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "GetMessagesBetweenPlaces" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  checked=""
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetMessagesBetweenPlaces
+                  <span
+                    class="ml-2 badge badge-primary"
+                  >
+                    GET
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="The default road is Sheridan, WY to Cheyenne, WY and should have some messages."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Query Arguments
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="8"
+            >
+              ?
+StartLat=44.919423
+&
+StartLng=-107.113545
+&
+EndLat=41.085281
+&
+EndLng=-104.819149
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "GetMessagesIntersectingGeometry" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  checked=""
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetMessagesIntersectingGeometry
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="The default covers an area from Denver northward and should have some messages."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="27"
+            >
+              {
+   "type": "Polygon",
+   "coordinates": [
+      [
+         [
+            -105.251255,
+            41
+         ],
+         [
+            -105.251255,
+            39.6355
+         ],
+         [
+            -104,
+            39.6355
+         ],
+         [
+            -104,
+            41
+         ],
+         [
+            -105.251255,
+            41
+         ]
+      ]
+   ]
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "Wzdx   (for all results near a given point)" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  checked=""
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  Wzdx   (for all results near a given point)
+                  <span
+                    class="ml-2 badge badge-primary"
+                  >
+                    GET
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Searches WZDx by radius from specified location.  Radius (in miles) must be from an enumerated list."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Query Arguments
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="6"
+            >
+              ?
+lat=37.594049901
+&
+lon=-122.490431
+&
+dist=5
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "Wzdx  (for all results in a state)" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  checked=""
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  Wzdx  (for all results in a state)
+                  <span
+                    class="ml-2 badge badge-primary"
+                  >
+                    GET
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Searches WZDx by postal abbreviation."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Query Arguments
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="2"
+            >
+              ?
+postalAbbreviation=MA
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "Wzdx/CheckJsonFeed" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  checked=""
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  Wzdx/CheckJsonFeed
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Returns a list of errors in the WZDx feed."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="127"
+            >
+              {
+    "feed_info": {
+        "update_date": "2020-06-18T15:00:00Z",
+            "publisher": "TestDOT",
+                "contact_name": "Frederick Francis Feedmanager",
+                    "contact_email": "fred.feedmanager@testdot.gov",
+                        "update_frequency": 60,
+                            "version": "4.2",
+                                "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+                                    "data_sources": [
+                                        {
+                                            "data_source_id": "1",
+                                            "organization_name": "Test City 1",
+                                            "contact_name": "Solomn Soliel Sourcefeed",
+                                            "contact_email": "solomon.sourcefeed@testcity1.gov",
+                                            "update_frequency": 300,
+                                            "update_date": "2020-06-18T14:37:31Z"
+                                        }
+                                    ]
+    },
+    "type": "FeatureCollection",
+        "features": [
+            {
+                "id": "8fed746d-8f4f-4e0c-8d9b-fa4db7c3c2d8",
+                "type": "Feature",
+                "properties": {
+                    "core_details": {
+                        "data_source_id": "1",
+                        "event_type": "work-zone",
+                        "direction": "westbound",
+                        "description": "Multi-lane closure example",
+                        "creation_date": "2010-12-30T22:42:53Z",
+                        "update_date": "2010-01-03T01:51:43Z"
+                    },
+                    "beginning_milepost": 139.9,
+                    "ending_milepost": 138.5,
+                    "is_start_position_verified": true,
+                    "is_end_position_verified": false,
+                    "start_date": "2010-01-02T08:00:00Z",
+                    "end_date": "2010-03-31T23:00:00Z",
+                    "location_method": "channel-device-method",
+                    "is_start_date_verified": false,
+                    "is_end_date_verified": false,
+                    "vehicle_impact": "some-lanes-closed",
+                    "worker_presence": {
+                        "are_workers_present": true,
+                        "method": "camera-monitoring",
+                        "definition": [
+                            "workers-in-work-zone-working"
+                        ],
+                        "worker_presence_last_confirmed_date": "2010-01-03T01:51:43Z",
+                        "confidence": "low"
+                    },
+                    "reduced_speed_limit_kph": 88.5,
+                    "restrictions": [
+                        {
+                            "type": "reduced-width",
+                            "value": 16,
+                            "unit": "feet"
+                        },
+                        {
+                            "type": "reduced-weight",
+                            "value": 156000
+                        }
+                    ],
+                    "types_of_work": [
+                        {
+                            "type_name": "surface-work",
+                            "is_architectural_change": false
+                        }
+                    ],
+                    "lanes": [
+                        {
+                            "order": 1,
+                            "status": "closed",
+                            "type": "shoulder"
+                        },
+                        {
+                            "order": 2,
+                            "status": "closed",
+                            "type": "general"
+                        },
+                        {
+                            "order": 3,
+                            "status": "closed",
+                            "type": "general"
+                        },
+                        {
+                            "order": 4,
+                            "status": "open",
+                            "type": "general"
+                        },
+                        {
+                            "order": 5,
+                            "status": "open",
+                            "type": "shoulder"
+                        }
+                    ]
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -93.53729725067586,
+                            41.65790432034191
+                        ],
+                        [
+                            -93.54482889364739,
+                            41.65678209854977
+                        ],
+                        [
+                            -93.5544848462825,
+                            41.65535524547257
+                        ],
+                        [
+                            -93.5594844836903,
+                            41.654633790830985
+                        ],
+                        [
+                            -93.56351852612453,
+                            41.65410471898907
+                        ]
+                    ]
+                }
+            }
+        ]
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render after selecting "Wzdx/SwitchSpecVersion" 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  checked=""
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  Wzdx/SwitchSpecVersion
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Allows switching a WZDx feed to a different version. Some data will be lost if the target version does not support the data."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          Desired Outgoing Version
+          <div
+            class="outgoing=version-radio-buttons"
+          >
+            <div>
+              <input
+                checked=""
+                name="outgoing-version"
+                type="radio"
+                value="2.0"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                2.0
+              </label>
+            </div>
+            <div>
+              <input
+                name="outgoing-version"
+                type="radio"
+                value="3.0"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                3.0
+              </label>
+            </div>
+            <div>
+              <input
+                name="outgoing-version"
+                type="radio"
+                value="3.1"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                3.1
+              </label>
+            </div>
+            <div>
+              <input
+                name="outgoing-version"
+                type="radio"
+                value="4.0"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                4.0
+              </label>
+            </div>
+            <div>
+              <input
+                name="outgoing-version"
+                type="radio"
+                value="4.1"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                4.1
+              </label>
+            </div>
+            <div>
+              <input
+                name="outgoing-version"
+                type="radio"
+                value="4.2"
+              />
+              <label
+                for="item"
+              >
+                 
+                 
+                4.2
+              </label>
+            </div>
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="131"
+            >
+              {
+    "feed_info": {
+        "update_date": "2020-06-18T15:00:00Z",
+            "publisher": "TestDOT",
+                "contact_name": "Frederick Francis Feedmanager",
+                    "contact_email": "fred.feedmanager@testdot.gov",
+                        "update_frequency": 60,
+                            "version": "4.2",
+                                "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+                                    "data_sources": [
+                                        {
+                                            "data_source_id": "1",
+                                            "organization_name": "Test City 1",
+                                            "contact_name": "Solomn Soliel Sourcefeed",
+                                            "contact_email": "solomon.sourcefeed@testcity1.gov",
+                                            "update_frequency": 300,
+                                            "update_date": "2020-06-18T14:37:31Z"
+                                        }
+                                    ]
+    },
+    "type": "FeatureCollection",
+        "features": [
+            {
+                "id": "8fed746d-8f4f-4e0c-8d9b-fa4db7c3c2d8",
+                "type": "Feature",
+                "properties": {
+                    "core_details": {
+                        "data_source_id": "1",
+                        "event_type": "work-zone",
+                        "road_names": [
+                            "I-80"
+                        ],
+                        "direction": "westbound",
+                        "description": "Multi-lane closure example",
+                        "creation_date": "2010-12-30T22:42:53Z",
+                        "update_date": "2010-01-03T01:51:43Z"
+                    },
+                    "beginning_milepost": 139.9,
+                    "ending_milepost": 138.5,
+                    "is_start_position_verified": true,
+                    "is_end_position_verified": false,
+                    "start_date": "2010-01-02T08:00:00Z",
+                    "end_date": "2010-03-31T23:00:00Z",
+                    "location_method": "channel-device-method",
+                    "is_start_date_verified": false,
+                    "is_end_date_verified": false,
+                    "vehicle_impact": "some-lanes-closed",
+                    "worker_presence": {
+                        "are_workers_present": true,
+                        "method": "camera-monitoring",
+                        "definition": [
+                            "workers-in-work-zone-working"
+                        ],
+                        "worker_presence_last_confirmed_date": "2010-01-03T01:51:43Z",
+                        "confidence": "low"
+                    },
+                    "reduced_speed_limit_kph": 88.5,
+                    "restrictions": [
+                        {
+                            "type": "reduced-width",
+                            "value": 16,
+                            "unit": "feet"
+                        },
+                        {
+                            "type": "reduced-weight",
+                            "value": 156000,
+                            "unit": "pounds"
+                        }
+                    ],
+                    "types_of_work": [
+                        {
+                            "type_name": "surface-work",
+                            "is_architectural_change": false
+                        }
+                    ],
+                    "lanes": [
+                        {
+                            "order": 1,
+                            "status": "closed",
+                            "type": "shoulder"
+                        },
+                        {
+                            "order": 2,
+                            "status": "closed",
+                            "type": "general"
+                        },
+                        {
+                            "order": 3,
+                            "status": "closed",
+                            "type": "general"
+                        },
+                        {
+                            "order": 4,
+                            "status": "open",
+                            "type": "general"
+                        },
+                        {
+                            "order": 5,
+                            "status": "open",
+                            "type": "shoulder"
+                        }
+                    ]
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [
+                            -93.53729725067586,
+                            41.65790432034191
+                        ],
+                        [
+                            -93.54482889364739,
+                            41.65678209854977
+                        ],
+                        [
+                            -93.5544848462825,
+                            41.65535524547257
+                        ],
+                        [
+                            -93.5594844836903,
+                            41.654633790830985
+                        ],
+                        [
+                            -93.56351852612453,
+                            41.65410471898907
+                        ]
+                    ]
+                }
+            }
+        ]
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render when the API key is missing 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  checked=""
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div
+            class="alert alert-danger"
+            role="alert"
+          >
+            An API Key wasn't provided. Follow the instructions in the README to configure the project before proceeding.
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetData
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Alternatives to GetData are GetBundles and GetDistributions."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  disabled=""
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <br />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`App snapshots > matches the render with populated results 1`] = `
+<div>
+  <div
+    class="row"
+  >
+    <div
+      class="col-sm-3"
+    >
+      <div
+        class="card"
+      >
+        <div
+          class="card-body"
+        >
+          <div
+            class="radio-buttons"
+          >
+            <div>
+              <label
+                for="0"
+              >
+                <input
+                  checked=""
+                  id="0"
+                  name="query-type"
+                  type="radio"
+                  value="GetData"
+                />
+                 
+                 
+                GetData
+              </label>
+            </div>
+            <div>
+              <label
+                for="1"
+              >
+                <input
+                  id="1"
+                  name="query-type"
+                  type="radio"
+                  value="GetDecodedMessages"
+                />
+                 
+                 
+                GetDecodedMessages
+              </label>
+            </div>
+            <div>
+              <label
+                for="2"
+              >
+                <input
+                  id="2"
+                  name="query-type"
+                  type="radio"
+                  value="GetGeoJsonData"
+                />
+                 
+                 
+                GetGeoJsonData
+              </label>
+            </div>
+            <div>
+              <label
+                for="3"
+              >
+                <input
+                  id="3"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesBetweenPlaces"
+                />
+                 
+                 
+                GetMessagesBetweenPlaces
+              </label>
+            </div>
+            <div>
+              <label
+                for="4"
+              >
+                <input
+                  id="4"
+                  name="query-type"
+                  type="radio"
+                  value="GetMessagesIntersectingGeometry"
+                />
+                 
+                 
+                GetMessagesIntersectingGeometry
+              </label>
+            </div>
+            <div>
+              <label
+                for="5"
+              >
+                <input
+                  id="5"
+                  name="query-type"
+                  type="radio"
+                  value="Decode"
+                />
+                 
+                 
+                Decode
+              </label>
+            </div>
+            <div>
+              <label
+                for="6"
+              >
+                <input
+                  id="6"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx  (for all results in a state)"
+                />
+                 
+                 
+                Wzdx  (for all results in a state)
+              </label>
+            </div>
+            <div>
+              <label
+                for="7"
+              >
+                <input
+                  id="7"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx   (for all results near a given point)"
+                />
+                 
+                 
+                Wzdx   (for all results near a given point)
+              </label>
+            </div>
+            <div>
+              <label
+                for="8"
+              >
+                <input
+                  id="8"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/SwitchSpecVersion"
+                />
+                 
+                 
+                Wzdx/SwitchSpecVersion
+              </label>
+            </div>
+            <div>
+              <label
+                for="9"
+              >
+                <input
+                  id="9"
+                  name="query-type"
+                  type="radio"
+                  value="Wzdx/CheckJsonFeed"
+                />
+                 
+                 
+                Wzdx/CheckJsonFeed
+              </label>
+            </div>
+            <div>
+              <label
+                for="10"
+              >
+                <input
+                  id="10"
+                  name="query-type"
+                  type="radio"
+                  value="DepositMulti"
+                />
+                 
+                 
+                DepositMulti
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="col-sm-9"
+    >
+      <div
+        class="container"
+      >
+        <div>
+          <div
+            class="App"
+          >
+            <h4>
+              SDx API Query Examples
+            </h4>
+            <p
+              class="lead"
+            >
+              Please refer to 
+              <a
+                href="https://example.test"
+              >
+                https://example.test
+              </a>
+               for documentation.
+            </p>
+            <hr />
+          </div>
+          <div>
+            <div>
+              <div>
+                 
+                <h4>
+                  GetData
+                  <span
+                    class="ml-2 badge badge-success"
+                  >
+                    POST
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div
+              class="input-group mb-3"
+            >
+              <input
+                class="form-control"
+                id="notes"
+                placeholder="Alternatives to GetData are GetBundles and GetDistributions."
+                readonly=""
+              />
+              <div
+                class="input-group-append"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                >
+                  Generate Request
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br />
+            <div
+              class="form-group"
+            >
+              <h5>
+                <b>
+                  POST
+                </b>
+                 with this Request URL:
+              </h5>
+              <div
+                class="row"
+              >
+                <div
+                  class="col-sm-11 pr-0"
+                >
+                  <textarea
+                    class="form-control"
+                    id="submittedUrl"
+                    readonly=""
+                    rows="1"
+                  >
+                    https://example.test/api/GetData
+                  </textarea>
+                </div>
+                <div
+                  class="col-sm-1 pl-0"
+                >
+                  <button
+                    class="btn btn-secondary"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+          <h5
+            style="clear: both;"
+          >
+            Results
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              id="results"
+              readonly=""
+              rows="10"
+            >
+              {
+    "foo": "bar",
+    "baz": [
+        1,
+        2,
+        3
+    ]
+}
+            </textarea>
+            <small
+              class="float-left"
+            >
+              Status: 200 OK
+            </small>
+            <small
+              class="float-right"
+            />
+          </div>
+          <h5>
+            Body of Request
+          </h5>
+          <div
+            class="form-group"
+          >
+            <textarea
+              class="form-control"
+              rows="15"
+            >
+              {
+    "dialogID": "156",
+    "startDate": "2017-01-01T00:00:00.000Z",
+    "startDateOperator": "GTE",
+    "endDate": "2024-01-01T00:00:00.000Z",
+    "endDateOperator": "LTE",
+    "nwLat": "41.979552",
+    "nwLon": "-111.065979",
+    "seLat": "41.004686",
+    "seLon": "-104.029755",
+    "orderByField": "createdAt",
+    "orderByOrder": "-1",
+    "skip": "0",
+    "limit": "10"
+}
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
