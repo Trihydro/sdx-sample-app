@@ -41,3 +41,21 @@ If you get a webpage at localhost:3000 but there seems to be no reaction at all 
 
 ## Usage
 Use the Query text area to modify query parameters. After a query has been run, results are displayed in the Results area.
+
+## Testing
+Tests are written with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). They don't require a `.env` file or a real API key — the network layer is mocked and any needed environment values are stubbed within the tests themselves.
+
+Run the test suite once:
+```
+yarn test
+```
+
+Or run it in watch mode while you work:
+```
+yarn test:watch
+```
+
+### What's covered
+- `src/sdxService.test.ts` - unit tests for the service layer (`src/sdxService.ts`), covering URL/method/header/body construction for every sample query in `REQUESTOBJECTS`, plus error handling.
+- `src/App.test.tsx` - tests for the `App` component's behavior (wiring user actions to the service, DepositMulti gating, client-side validation, and displaying results/errors), with the service layer mocked.
+- `src/App.snapshot.test.tsx` - snapshot tests of the rendered UI for various selected requests and states.
