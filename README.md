@@ -4,8 +4,7 @@ A simple, single-page React application to showcase the structure of queries to 
 ## Prerequisites
 - You need Node.js but this page for npm says not to use the Node installer!  https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 "We strongly recommend using a Node version manager like nvm to install Node.js and npm. We do not recommend using a Node installer, since the Node installation process installs npm in a directory with local permissions and can cause permissions errors when you run npm packages globally."
-Instead, on Windows use Nodist or nvm-windows and on Apple or Linux use nvm.
--I used Nodist here https://github.com/nodists/nodist/releases from the 'Installation' section but note that it says to uninstall Node first if you already have Node installed.
+Instead, on Windows use nvm-windows (nvm4w) and on Apple or Linux use nvm.
 - Yarn (this requires Yarn 1 which can currently be found here:  https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable) and you should be able to install the old Yarn by using
 npm install --global yarn
 - Chrome or Firefox
@@ -41,3 +40,34 @@ If you get a webpage at localhost:3000 but there seems to be no reaction at all 
 
 ## Usage
 Use the Query text area to modify query parameters. After a query has been run, results are displayed in the Results area.
+
+## Testing
+Tests are written with [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). They don't require a `.env` file or a real API key — the network layer is mocked and any needed environment values are stubbed within the tests themselves.
+
+Run the test suite once:
+```
+yarn test
+```
+
+Or run it in watch mode while you work:
+```
+yarn test:watch
+```
+
+### What's covered
+- `src/sdxService.test.ts` - unit tests for the service layer (`src/sdxService.ts`), covering URL/method/header/body construction for every sample query in `REQUESTOBJECTS`, plus error handling.
+- `src/App.test.tsx` - tests for the `App` component's behavior (wiring user actions to the service, DepositMulti gating, client-side validation, and displaying results/errors), with the service layer mocked.
+- `src/App.snapshot.test.tsx` - snapshot tests of the rendered UI for various selected requests and states.
+
+
+## Troubleshooting
+### If `yarn` isn't found after switching Node version managers
+If you've ever switched Node version managers on Windows (e.g. from Nodist to nvm-windows), `yarn` may install successfully but still not be found on your `PATH`. This happens when your npm user config (`~/.npmrc`) has a leftover `prefix` setting pointing at the old version manager's directory — global installs silently go there instead of next to your current `node.exe`. Check with:
+```
+npm config get prefix
+```
+If it points somewhere other than your current Node install directory, clear it and reinstall:
+```
+npm config delete prefix
+npm install --global yarn
+```
